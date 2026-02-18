@@ -1,0 +1,12 @@
+# Environment files
+.env
+.env.*
+
+# Node and vendor
+node_modules/
+vendor/
+
+# OS/editor files
+.DS_Store
+.idea/
+.vscode/
