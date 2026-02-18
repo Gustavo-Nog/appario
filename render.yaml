@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: appario-laravel
+    env: docker
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: APP_KEY
+        value: <sua_key_aqui>
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://appario.onrender.com
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        value: <host_do_banco>
+      - key: DB_PORT
+        value: 5432
+      - key: DB_DATABASE
+        value: <nome_do_banco>
+      - key: DB_USERNAME
+        value: <usuario_do_banco>
+      - key: DB_PASSWORD
+        value: <senha_do_banco>
