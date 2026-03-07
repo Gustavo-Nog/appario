@@ -1,0 +1,11 @@
+body {
+    background-color: #f2f2f2;
+    background-image: url('/img/backgroundImg.png');
+    background-repeat: no-repeat; 
+    background-size: cover;
+    background-position: center; 
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
