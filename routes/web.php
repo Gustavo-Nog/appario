@@ -31,7 +31,7 @@ Route::group([], function () {
     Route::get('/usuarios/{id_usuario}', [UsuarioController::class, 'show'])->name('usuarios.show');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'ensure.pessoa'])->group(function () {
     Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
 
     Route::resource('pessoas', PessoaController::class);
@@ -40,12 +40,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/apiarios/adicionar', [ApiarioController::class, 'create'])->name('apiarios.adicionar');
     Route::resource('apiarios', ApiarioController::class);
     Route::get('/relatorio-apiarios', [ApiarioController::class, 'gerarRelatorioPDF'])->name('apiarios.relatorio');
-
-    Route::resource('colmeias', ColmeiaController::class);
-    Route::get('/relatorio-colmeias', [ColmeiaController::class, 'gerarRelatorioPDF'])->name('colmeias.relatorio');
-
     Route::get('/apiarios/{id_apiario}', [ApiarioController::class, 'show'])->name('apiarios.mostrar');
-   
+
+    Route::get('/colmeias', [ColmeiaController::class, 'index'])->name('colmeias.index');
+    Route::get('/colmeias/create', [ColmeiaController::class, 'create'])->name('colmeias.create');
+    Route::get('/relatorio-colmeias', [ColmeiaController::class, 'gerarRelatorioPDF'])->name('colmeias.relatorio');
+    Route::resource('apiarios.colmeias', ColmeiaController::class)
+        ->except(['index', 'create'])
+        ->parameters([
+            'apiarios' => 'id_apiario',
+            'colmeias' => 'id_colmeia'
+        ]);
+
     Route::view('/inspecao', 'em-construcao.emConstrucao')->name('inspecao.construcao');
     Route::view('/apicultor', 'em-construcao.emConstrucao')->name('apicultor.construcao');
 
