@@ -23,9 +23,13 @@ Route::middleware(['auth:sanctum', 'ensure.pessoa'])->group(function() {
     ]);
     Route::get('/relatorio-apiarios', [ApiarioController::class, 'gerarRelatorioPDF'])->name('apiarios.relatorio');
 
-    Route::apiResource('colmeias', ColmeiaController::class)->parameters([
-        'colmeias' => 'id_colmeia'
-    ]);
+    Route::get('/colmeias', [ColmeiaController::class, 'index']);
     Route::get('/relatorio-colmeias', [ColmeiaController::class, 'gerarRelatorioPDF'])->name('colmeias.relatorio');
 
+    Route::apiResource('apiarios.colmeias', ColmeiaController::class)
+        ->only(['store','show','update','destroy'])
+        ->parameters([
+            'apiarios' => 'id_apiario',
+            'colmeias' => 'id_colmeia',
+        ]);
 });
