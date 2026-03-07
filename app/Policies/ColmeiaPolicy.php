@@ -14,7 +14,7 @@ class ColmeiaPolicy
 
     public function view(Usuario $usuario, Colmeia $colmeia): bool
     {
-        return $usuario>pessoa && $colmeia->apiario->pessoa_id === $usuario->pessoa->id_pessoa;
+        return $usuario->pessoa && $colmeia->apiario->pessoa_id === $usuario->pessoa->id_pessoa;
     }
 
     public function create(Usuario $usuario): bool
