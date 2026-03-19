@@ -19,8 +19,18 @@ COPY . .
 # Instala as dependências do Laravel
 RUN composer install --no-dev --optimize-autoloader
 
+# Criar pastas para o storage
+RUN mkdir -p storage/framework/sessions \
+    storage/framework/views \
+    storage/framework/cache \
+    bootstrap/cache
+
+RUN chmod -R 775 storage bootstrap/cache
+
 # Expõe a porta que o Laravel irá rodar
 EXPOSE 8000
+
+# depois de copiar o código e instalar dependências
 
 # Comando que inicia o Laravel com artisan
 CMD php artisan serve --host=0.0.0.0 --port=8000
