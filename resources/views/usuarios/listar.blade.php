@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios</title>
-    <link rel="icon" href="{{ asset('favicon-32x32.png') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('img/favicon-32x32.png') }}" type="image/x-icon" />
     <link href="{{ asset('css/components/base.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/usuarios/form_pessoa_usuario.css') }}" rel="stylesheet">

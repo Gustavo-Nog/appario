@@ -3,29 +3,113 @@
 
 @section('title', 'Perfil de Pessoa')
 
+@push('styles')
+<link href="{{ asset('css/pessoas/show.css') }}" rel="stylesheet" />
+@endpush
+
 @section('content')
-  <div class="container">
-    <h1 class="mb-4">Perfil de<br> {{ $pessoa->nome }} {{ $pessoa->sobrenome }}</h1>
+  <div class="container-fluid titulo mb-3">
+    <div class="row align-items-center">
+      <div class="col-6 col-md-6 mt-3 mt-md-0">
+        <h1 class="mb-0">SEU PERFIL</h1> 
+      </div>
+      <div class="col-6 col-md-6 text-md-end mt-3 mt-md-0 botoes-perfil">
+        <a href="{{ route('pessoas.edit', $pessoa->id_pessoa) }}" class="btn btn-primary me-2">
+          <i class="bi bi-pencil"></i>
+          <span class="d-none d-md-inline"> Editar perfil</span>
+        </a>
 
-    <dl class="row">
-
-      <dt class="col-sm-3">Nome</dt>
-      <dd class="col-sm-9">{{ $pessoa->nome }}</dd>
-
-      <dt class="col-sm-3">Sobrenome</dt>
-      <dd class="col-sm-9">{{ $pessoa->sobrenome }}</dd>
-
-      <dt class="col-sm-3">CPF</dt>
-      <dd class="col-sm-9">{{ $pessoa->cpf }}</dd>
-
-      <dt class="col-sm-3">Tipo</dt>
-      <dd class="col-sm-9">{{ $pessoa->tipo }}</dd>
-    </dl>
-
-    <a href="{{ route('pessoas.edit', $pessoa->id_pessoa) }}" class="btn btn-primary">Editar</a>
-
-    <a href="{{ route('pessoas.delete', $pessoa->id_pessoa) }}" class="btn btn-danger ms-2">
-      Excluir
-    </a>
+        <form action="{{ route('pessoas.destroy', $pessoa->id_pessoa) }}" method="POST" class="d-inline">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn btn-danger" onclick="return confirm('Confirma exclusão desta pessoa?')">
+            <i class="bi bi-trash"></i>
+            <span class="d-none d-md-inline"> Excluir perfil</span>
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
+
+  <div class="conteudo-perfil container-fluid">
+    <div class="row align-items-center mb-4">
+      <div class="col-auto d-flex align-items-center gap-3">
+        <i class="bi bi-person-circle" style="font-size: 3rem;"></i>
+        <div>
+          <h3 class="mb-0">{{ $pessoa->nome }} {{ $pessoa->sobrenome }}</h3>
+          <small class="text-muted">{{ $pessoa->tipo_pessoa ?? $pessoa->tipo }}</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="info-grid">
+          <div class="info-card">
+            <h5>Nome</h5>
+            <div class="info-value">{{ $pessoa->nome }}</div>
+          </div>
+
+          <div class="info-card">
+            <h5>Sobrenome</h5>
+            <div class="info-value">{{ $pessoa->sobrenome }}</div>
+          </div>
+
+          <div class="info-card">
+            <h5>CPF</h5>
+            <div class="info-value">{{ $pessoa->cpf }}</div>
+          </div>
+
+          <div class="info-card">
+            <h5>E-mail</h5>
+            <div class="info-value">{{ $pessoa->usuario->email ?? '—' }}</div>
+          </div>
+
+          <div class="info-card">
+            <h5>Apiários</h5>
+            <div class="info-value">{{ $pessoa->apiarios_count ?? ($pessoa->apiarios ? $pessoa->apiarios->count() : 'Nenhum apiário') }}</div>
+          </div>
+
+          <div class="info-card">
+            <h5>Colmeias</h5>
+            <div class="info-value">{{ $totalColmeias ?? 'Nenhuma colmeia' }}</div>
+          </div>
+
+          <h2>Endereço</h2>
+          <div></div>
+          
+          <div class="info-card">
+            <h5>Estado</h5>
+            <div class="info-value">{{ $endereco->estado ?? 'Não informado' }}</div>
+          </div>
+
+          <div class="info-card">
+            <h5>Cidade</h5>
+            <div class="info-value">{{ $endereco->cidade ?? 'Não informado' }}</div>
+          </div>
+
+          <div class="info-card">
+            <h5>CEP</h5>
+            <div class="info-value">{{ $endereco->cep ?? 'Não informado' }}</div>
+          </div>
+
+          <div class="info-card">
+            <h5>Bairro</h5>
+            <div class="info-value">{{ $endereco->bairro ?? 'Não informado' }}</div>
+          </div>
+
+          <div class="info-card">
+            <h5>Logradouro</h5>
+            <div class="info-value">{{ $endereco->logradouro ?? 'Não informado' }}</div>
+          </div>
+
+          <div class="info-card">
+            <h5>Número</h5>
+            <div class="info-value">{{ $endereco->numero ?? 'Não informado' }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 @endsection

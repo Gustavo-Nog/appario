@@ -8,7 +8,11 @@
 <body>
 
     <h1>Relatório de Apiários</h1>
-    <h2>Responsável: {{ $pessoa->nome }}</h2>
+    @if ($pessoa)
+        <h2>Responsável: {{ $pessoa->nome }}</h2>
+    @else
+        <h2>Responsável: Não informado</h2>
+    @endif
 
     <div class="section">
         <table>
@@ -28,7 +32,7 @@
                         <td>{{ number_format($apiario->area, 2, ',', '.') }}</td>
                         <td>{{ \Carbon\Carbon::parse($apiario->data_criacao)->format('d/m/Y') }}</td>
                         <td>{{ $apiario->coordenadas ?? 'Não informado' }}</td>
-                        <td>{{ $apiario->colmeias->count() }}</td>
+                        <td class="text-center">{{ $apiario->colmeias->count() }}</td>
                     </tr>
                     <tr>
                         <td colspan="6">
@@ -43,6 +47,7 @@
                         </td>
                     </tr>
                 @endforeach
+                <span></span>
             </tbody>
         </table>
     </div>
