@@ -6,7 +6,7 @@
   <link href="{{ asset('css/colmeias/index.css') }}" rel="stylesheet">
 
   <div class="page-title">Colmeias já cadastradas</div>
-        <a href="{{ route('colmeias.relatorio') }}" target="_blank" class="btn btn-warning relatorio-button">
+        <a href="{{ route('colmeias.relatorio') }}" class="btn btn-warning relatorio-button">
             📄 Gerar Relatório
         </a>
 

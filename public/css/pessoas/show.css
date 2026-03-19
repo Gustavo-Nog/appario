@@ -1,0 +1,58 @@
+main {
+    padding: 0;
+    max-width: 100%;
+    margin: 0 !important;
+}
+
+.conteudo-perfil {
+    padding: 2rem;
+    width: 100%;
+    max-width: none;
+}
+
+.conteudo-perfil p {
+    font-weight: 300;
+}
+
+.info-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+}
+
+.info-card {
+    border: 1px solid #00000014;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    min-height: 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 1px 4px #f5c802;
+}
+
+.info-card h5 {
+    margin: 0 0 0.35rem 0;
+    font-size: 0.9rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.info-value {
+    font-size: 1rem;
+    color: #222;
+    word-break: break-word;
+}
+
+.botoes-perfil {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.placeholder { color: #6c757d; font-style: italic; }
+
+@media (min-width: 768px) {
+    .info-grid { grid-template-columns: repeat(2, 1fr); }
+}

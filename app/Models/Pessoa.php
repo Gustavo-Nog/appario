@@ -39,4 +39,10 @@ class Pessoa extends Model
     {
         return $this->hasMany(EnderecoPessoa::class, 'pessoa_id', 'id_pessoa');
     }
+    
+    public function getEnderecoPrincipal()
+    {
+        return $this->enderecos()->first();
+    }
+
 }

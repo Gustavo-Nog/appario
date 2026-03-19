@@ -1,7 +1,6 @@
 .navbar-custom {
   background-color: #ff7a00;
-  /* tom de laranja */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px #0000001a;
   position: absolute;
   top: 0;
 }

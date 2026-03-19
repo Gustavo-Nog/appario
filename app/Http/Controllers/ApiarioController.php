@@ -122,7 +122,7 @@ class ApiarioController extends Controller
 
     }
 
-    public function edit(int $id_apiario, Request $request)
+    public function edit(int $id_apiario, UpdateRequest $request)
     {
         $pessoa = $request->attributes->get('pessoa');
         $id_pessoa = $pessoa->id_pessoa;
@@ -179,10 +179,9 @@ class ApiarioController extends Controller
     {
         $pessoa = $request->attributes->get('pessoa');
         $id_pessoa = $pessoa->id_pessoa;
-
-        $this->authorize('delete', $apiario);
-
         try {
+            $apiario = $this->apiarioRepository->findForPessoaOrFail($id_apiario, $id_pessoa);
+            $this->authorize('delete', $apiario);
             $this->apiarioRepository->deleteApiario($id_apiario, $id_pessoa);
 
             if ($request->wantsJson()) {
@@ -219,13 +218,6 @@ class ApiarioController extends Controller
 
         try {
             $relatorio = $this->apiarioRelatorio->apiarioRelatorioPDF($id_pessoa, $format);
-
-            if ($format === 'json') {
-                return response()->json([
-                    'status' => 'success',
-                    'data'   => $relatorio
-                ], 200);
-            }
 
             return $relatorio->download('relatorio-apiarios.pdf');
         } catch (\Throwable $th) {

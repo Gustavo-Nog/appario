@@ -5,12 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>@yield('title', 'Appário')</title>
-  <link rel="icon" href="{{ asset('favicon-32x32.png') }}" type="image/x-icon" />
+  <link rel="icon" href="{{ asset('img/favicon-32x32.png') }}" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-
-  <link href="{{ asset('css/base.css') }}" rel="stylesheet" />
 
   <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
   @stack('styles')
@@ -37,7 +35,7 @@
       @if ($pessoa && (Route::is('dashboard') || Route::is('colmeias.*') || Route::is('apiarios.*')))
         <div class="user-menu dropdown">
           <a href="#" role="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false" title="Menu do Usuário">
-            <i class="bi bi-person-circle text-white" style="font-size: 2rem;"></i>
+            <img src="{{ asset('img/apicultor.png') }}" alt="icone apicultor" height="45">
           </a>
           <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userMenu">
             <li>

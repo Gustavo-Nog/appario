@@ -49,6 +49,10 @@ header {
   text-decoration: underline;
 }
 
+.email {
+    text-transform: lowercase;
+}
+
 @media (max-width: 768px) {
   header {
     display: flex;

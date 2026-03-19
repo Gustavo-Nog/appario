@@ -15,6 +15,7 @@
     @endif
 
     <div class="section">
+        <div> Total de colmeias: {{ $totalColmeias ?? 'Nenhuma colmeia' }}</div>
         <table>
             <thead>
                 <tr>
@@ -22,7 +23,6 @@
                     <th>Tamanho</th>
                     <th>Data de Aquisição</th>
                     <th>Apiario Vinculado</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>

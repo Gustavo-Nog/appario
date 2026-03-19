@@ -12,8 +12,43 @@ class UpdateRequest extends FormRequest
         return true;
     }
 
+        public function ufs(): array 
+    {
+        return [
+            'AC' => 'Acre',
+            'AL' => 'Alagoas',
+            'AP' => 'Amapá',
+            'AM' => 'Amazonas',
+            'BA' => 'Bahia',
+            'CE' => 'Ceará',
+            'DF' => 'Distrito Federal',
+            'ES' => 'Espírito Santo',
+            'GO' => 'Goiás',
+            'MA' => 'Maranhão',
+            'MT' => 'Mato Grosso',
+            'MS' => 'Mato Grosso do Sul',
+            'MG' => 'Minas Gerais',
+            'PA' => 'Pará',
+            'PB' => 'Paraíba',
+            'PR' => 'Paraná',
+            'PE' => 'Pernambuco',
+            'PI' => 'Piauí',
+            'RJ' => 'Rio de Janeiro',
+            'RN' => 'Rio Grande do Norte',
+            'RS' => 'Rio Grande do Sul',
+            'RO' => 'Rondônia',
+            'RR' => 'Roraima',
+            'SC' => 'Santa Catarina',
+            'SP' => 'São Paulo',
+            'SE' => 'Sergipe',
+            'TO' => 'Tocantins',
+        ];
+    }
+
     public function rules(): array
     {
+        $ufs = array_keys($this->ufs());
+
         return [
             'nome' => 'sometimes|string|max:50',
             'sobrenome' => 'sometimes|string|max:50',
@@ -25,6 +60,14 @@ class UpdateRequest extends FormRequest
             ],
             'tipo_pessoa' => ['sometimes', Rule::in(['APICULTOR', 'RESPONSAVEL'])],
             //'usuario_id' => 'sometimes|exists:usuarios,id_usuarios',
+
+            'logradouro'  => 'sometimes|nullable|string|max:80',
+            'numero'      => 'sometimes|nullable|string|max:10',
+            'complemento' => 'nullable|string|max:75',
+            'bairro'      => 'sometimes|nullable|string|max:50',
+            'cep'         => 'sometimes|nullable|string|size:10',
+            'cidade'      => 'sometimes|nullable|string|max:50',
+            'estado'      => ['sometimes', 'nullable', 'string', 'size:2', Rule::in($ufs)],
         ];
     }
 }

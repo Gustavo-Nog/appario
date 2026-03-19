@@ -6,7 +6,7 @@
 @section('content')
 
   <div class="page-title">Apiários já adicionados</div>
-        <a href="{{ route('apiarios.relatorio') }}" target="_blank" class="btn btn-warning relatorio-button">
+        <a href="{{ route('apiarios.relatorio') }}" class="btn btn-warning relatorio-button">
           📄 Gerar Relatório
         </a>
 

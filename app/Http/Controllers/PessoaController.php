@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\PessoaRepository;
+use App\Repositories\ApiarioRepository;
 use App\Http\Requests\Pessoa\StoreRequest;
 use App\Http\Requests\Pessoa\UpdateRequest;
 use Illuminate\Http\Request;
@@ -10,14 +11,18 @@ use Illuminate\Http\Request;
 class PessoaController extends Controller
 {   
     protected PessoaRepository $pessoaRepository;
+    protected ApiarioRepository $apiarioRepository;
 
-    public function __construct(PessoaRepository $pessoaRepository) {
+    public function __construct(PessoaRepository $pessoaRepository, ApiarioRepository $apiarioRepository) {
         $this->pessoaRepository = $pessoaRepository;
+        $this->apiarioRepository = $apiarioRepository;
     }
 
     public function index(Request $request)
     {
-        try {
+        $is_admin = true;
+         if ($is_admin) {
+            try {
             $pessoas = $this->pessoaRepository->getAllPessoas();
 
             if ($request->wantsJson()) {
@@ -42,21 +47,36 @@ class PessoaController extends Controller
                     'error' => 'Erro a listar as pessoas' . $th->getMessage()
                 ]);
         }
+         } else {
+            return redirect()->back()->view('usuario.login');
+         }
+         
+        
     }
 
-    public function show(int $id_pessoa, Request $request) 
+    public function show(Request $request) 
     {
+        $pessoa = $request->attributes->get('pessoa');
+        $id_pessoa = $pessoa->id_pessoa;
+
         try {
-            $pessoa = $this->pessoaRepository->getPessoaById($id_pessoa);
+            $apiarios = $this->apiarioRepository->getApiarioByPessoa($id_pessoa);
+            $endereco = $pessoa->getEnderecoPrincipal();
+            $totalColmeias = $apiarios->sum('colmeias_count');
             
             if ($request->wantsJson()) {
                 return response()->json([
                     'status' => 'success',
-                    'data'   => $pessoa
+                    'data'   => [ 
+                        'pessoa' => $pessoa,
+                        'apiarios' => $apiarios,
+                        'enderecos' => $endereco,
+                        'totalColmeias' => $totalColmeias
+                    ]
                 ], 200);
             }
 
-            return view('pessoas.show', compact('pessoa'));
+            return view('pessoas.show', compact('pessoa', 'apiarios', 'endereco', 'totalColmeias'));
         } catch (\Throwable $th) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -146,9 +166,12 @@ class PessoaController extends Controller
     }
 
 
-    public function edit(int $id_pessoa)
+    public function edit(int $id_pessoa, UpdateRequest $request)
     {
-        return view('pessoas.edit', compact('pessoa'));
+        $pessoa = request()->attributes->get('pessoa');
+        $endereco = $pessoa->getEnderecoPrincipal();
+        $ufs = $request->ufs();
+        return view('pessoas.edit', compact('pessoa', 'endereco', 'ufs'));
     }
 
     public function update(UpdateRequest $request, int $id_pessoa)
@@ -156,6 +179,7 @@ class PessoaController extends Controller
         $data = $request->validated();
         try {
             $pessoa = $this->pessoaRepository->updatePessoa($id_pessoa, $data);
+            $id_pessoa = $pessoa->id_pessoa;
 
             if ($request->wantsJson()) {
                 return response()->json([
@@ -164,7 +188,7 @@ class PessoaController extends Controller
                 ], 200);
             }
             
-            return redirect()->route('pessoas.show', $pessoa->id_pessoa)
+            return redirect()->route('pessoas.show', $id_pessoa)
             ->with('success', 'Pessoa atualizada com sucesso!');
         } catch (\Throwable $th) {
             if ($request->wantsJson()) {
@@ -185,11 +209,13 @@ class PessoaController extends Controller
 
     public function delete(int $id_pessoa, Request $request)
     {
+        $pessoa = $request->attributes->get('pessoa');
         return view('pessoas.destroy', compact('pessoa'));
     }
 
     public function destroy(int $id_pessoa, Request $request)
     {
+        $pessoa = $request->attributes->get('pessoa');
         try {
             $this->pessoaRepository->deletePessoa($id_pessoa);
             if ($request->wantsJson()) {

@@ -30,8 +30,8 @@ class ColmeiaController extends Controller
             $this->authorize('viewAny', Colmeia::class);
             $pessoa_id = $pessoa->id_pessoa;
             $apiarios = $this->apiarioRepository->getApiarioByPessoa($pessoa_id);
-            $ids_colmeias = $apiarios->pluck('id_apiario')->toArray();
-            $colmeias = $this->colmeiaRepository->getColmeiasByApiarios($ids_colmeias);
+            $ids_apiarios = $apiarios->pluck('id_apiario')->toArray();
+            $colmeias = $this->colmeiaRepository->getColmeiasByApiarios($ids_apiarios);
 
             if ($request->wantsJson()) {
                     return response()->json([
@@ -80,7 +80,7 @@ class ColmeiaController extends Controller
         }
     }
 
-    public function create(int $id_apiario, Request $request)
+    public function create(Request $request)
     {
         $pessoa = $request->attributes->get('pessoa');
         $id_pessoa = $pessoa->id_pessoa;
@@ -89,15 +89,15 @@ class ColmeiaController extends Controller
         return view('colmeias.create', compact('apiarios'));
     }
 
-    public function store(int $id_apiario, StoreRequest $request)
+    public function store(StoreRequest $request)
     {
         $pessoa = $request->attributes->get('pessoa');
         $pessoa_id = $pessoa->id_pessoa;
+        $data = $request->validated();
+        $id_apiario = $data['apiario_id'];
 
         try {
             $this->apiarioRepository->findForPessoaOrFail($id_apiario, $pessoa_id);
-            $data = $request->validated();
-
             $colmeia = $this->colmeiaRepository->createColmeia($id_apiario, $data);
 
             if ($request->wantsJson()) {
@@ -132,7 +132,7 @@ class ColmeiaController extends Controller
         $id_pessoa = $pessoa->id_pessoa;
         $apiarios = $this->apiarioRepository->getApiarioByPessoa($id_pessoa);
 
-        $colmeia = $this->colmeiaRepository->findByIdApiario($id_colmeia, $id_colmeia);
+        $colmeia = $this->colmeiaRepository->findByIdApiario($id_colmeia, $id_apiario);
         $this->authorize('update', $colmeia);
 
         return view('colmeias.editar', compact('colmeia', 'apiarios'));
@@ -190,7 +190,7 @@ class ColmeiaController extends Controller
                 return response()->json([
                     'status'  => 'success',
                     'message' => 'Colmeia removido com sucesso.'
-                ], 204);
+                ], 202);
             }
 
             return redirect()->route('colmeias.index')
@@ -220,14 +220,7 @@ class ColmeiaController extends Controller
 
         try {
             $relatorio = $this->colmeiaRelatorio->colmeiaRelatorioPDF($id_pessoa, $format);
-
-            if ($format === 'json') {
-                return response()->json([
-                    'status' => 'success',
-                    'data'   => $relatorio
-                ], 200);
-            }
-
+            
             return $relatorio->download('relatorio-colmeias.pdf');
         } catch (\Throwable $th) {
             if ($request->wantsJson()) {

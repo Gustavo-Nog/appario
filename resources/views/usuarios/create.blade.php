@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="icon" href="{{ asset('favicon-32x32.png') }}" type="image/x-icon" />
+        <link rel="icon" href="{{ asset('img/favicon-32x32.png') }}" type="image/x-icon" />
         <link href="{{ asset('css/nav.css') }}" rel="stylesheet">
         <link href="{{ asset('css/components/base.css') }}" rel="stylesheet">
 
@@ -38,7 +38,7 @@
             <div class="row">
                 <div class="col-md-6 mt-3">
                     <label for="email">Seu Email</label>
-                    <input type="email" name="email" class="form-control" placeholder="Digite seu email" required>
+                    <input type="email" name="email" class="form-control email" placeholder="Digite seu email" required>
                 </div>
                 <div class="col-md-6 mt-3">
                     <label for="nome">Seu Nome</label>

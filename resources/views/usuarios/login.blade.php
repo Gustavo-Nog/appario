@@ -6,7 +6,7 @@
         <title>Login - Projeto</title>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="icon" href="{{ asset('favicon-32x32.png') }}" type="image/x-icon" />
+        <link rel="icon" href="{{ asset('img/favicon-32x32.png') }}" type="image/x-icon" />
         <link href="{{ asset('css/components/base.css') }}" rel="stylesheet">
 
         <link href="{{ asset('css/usuarios/login.css') }}" rel="stylesheet">
@@ -35,7 +35,7 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="{{ old('email') }}"required />
+                <input type="email" id="email" class="email" name="email" value="{{ old('email') }}"required />
                 @error('email')
                     <div style="color:red;">{{ $message }}</div>
                 @enderror
