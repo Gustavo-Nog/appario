@@ -44,9 +44,10 @@ Route::middleware(['auth', 'ensure.pessoa'])->group(function () {
 
     Route::get('/colmeias', [ColmeiaController::class, 'index'])->name('colmeias.index');
     Route::get('/colmeias/create', [ColmeiaController::class, 'create'])->name('colmeias.create');
+    Route::post('/colmeias', [ColmeiaController::class, 'store'])->name('colmeias.store');
     Route::get('/relatorio-colmeias', [ColmeiaController::class, 'gerarRelatorioPDF'])->name('colmeias.relatorio');
     Route::resource('apiarios.colmeias', ColmeiaController::class)
-        ->except(['index', 'create'])
+        ->except(['index', 'create', 'store'])
         ->parameters([
             'apiarios' => 'id_apiario',
             'colmeias' => 'id_colmeia'
