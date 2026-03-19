@@ -4,8 +4,10 @@ namespace App\Models;
 
 use App\Notifications\UsuarioResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 
@@ -35,6 +37,13 @@ class Usuario extends Authenticatable
     ];
 
     protected $attributes = ['tipo_usuario' => 'PESSOA'];
+
+    protected function email(): Attribute
+    {
+        return Attribute::make(
+            set: fn (string $email) => Str::lower($email)
+        );
+    }
 
     public function pessoa()
     {
