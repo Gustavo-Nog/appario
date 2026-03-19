@@ -1,13 +1,8 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+
 
 header.header-custom {
     background-color: #f5c802;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px #0000001a;
     width: 100%;
     position: fixed;
     top: 0;
@@ -39,14 +34,14 @@ header.header-custom {
 
 }
 
-
 .login-container {
     background-color: white;
     padding: 30px 40px;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px #f5c802;
     width: 100%;
     max-width: 400px;
+    margin: 120px auto 0; 
 }
 
 .login-container h2 {

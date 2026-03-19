@@ -1,6 +1,6 @@
 .navbar-custom {
     background-color: #f5c802;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px #0000001a;
     width: 100%;
     position: fixed;
     top: 0;
@@ -23,7 +23,7 @@ form {
     border-radius: 10px;
     max-width: 400px;
     margin: auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px #f5c802;
     margin-top: 120px;
 }
 
@@ -79,4 +79,15 @@ th {
 
 .programacao {
     text-align: center;
+}
+
+@media (max-width: 768px) {
+    form {
+        background-color: #ffffff;
+        padding: 25px;
+        border-radius: 10px;
+        max-width: 300px;
+        margin: auto;
+        box-shadow: 0 4px 8px #f5c802;
+    }
 }

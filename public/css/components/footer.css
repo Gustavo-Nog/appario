@@ -3,23 +3,26 @@ footer {
     color: white;
     font-size: 20px;
     text-align: center;
-    padding: 22px;
+    padding: 45px;
 }
 
 @media (max-width: 768px) {
     footer {
         font-size: 18px;
+        padding: 42px;
     }
 }
 
 @media (max-width: 480px) {
     footer {
         font-size: 16px;
+        
     }
 }
 
 @media (max-width: 400px) {
     footer {
         font-size: 14px;
+        padding: 45px;
     }
 }

@@ -11,6 +11,13 @@ html, body {
   overflow-x: hidden;
 }
 
+main {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
 header {
   background-color: #f8b400;
   width: 100%;
@@ -84,16 +91,8 @@ header {
   pointer-events: none;
 }
 
-main {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  background-color: #fff;
-}
-
 @media (max-width: 768px) {
   header {
-    flex-direction: column;
     padding: 1rem;
     gap: 0.5rem;
   }
@@ -108,6 +107,6 @@ main {
     font-size: 0.9rem;
   }
   .user-menu a {
-    font-size: 1.8rem;
+    font-size: 1rem;
   }
 }
