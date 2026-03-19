@@ -6,7 +6,7 @@
     <title>Appário - Página em Construção</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet" />
-    <link rel="icon" href="{{ asset('favicon-32x32.png') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('img/favicon-32x32.png') }}" type="image/x-icon" />
     <link href="{{ asset('css/pages/emconstrucao.css') }}" rel="stylesheet">
 </head>
 <body>
