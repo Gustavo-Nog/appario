@@ -33,4 +33,4 @@ EXPOSE 8000
 # depois de copiar o código e instalar dependências
 
 # Comando que inicia o Laravel com artisan
-CMD php artisan serve --host=0.0.0.0 --port=8000
+CMD CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000
