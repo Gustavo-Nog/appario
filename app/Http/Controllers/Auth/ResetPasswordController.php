@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
@@ -12,8 +11,6 @@ use Exception;
 
 class ResetPasswordController extends Controller
 {
-    use ResetsPasswords;
-
     /**
      * showResetForm: Exibe o formulário de redefinição de senha, passando o token e o e-mail para a view.
      * resetPassword: Atualiza a senha do usuário, hashando a nova senha e gerando novo token
@@ -26,6 +23,28 @@ class ResetPasswordController extends Controller
             'token' => $token,
             'email' => $request->email
         ]);
+    }
+
+    public function reset(Request $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:8',
+        ]);
+
+        $status = Password::broker('usuarios')->reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($usuario, $password) {
+                $this->resetPassword($usuario, $password);
+            }
+        );
+
+        if ($status == Password::PASSWORD_RESET) {
+            return $this->sendResetResponse($request, $status);
+        } else {
+            return back()->withErrors(['error' => 'Erro ao redefinir senha.']);
+        }
     }
 
     protected function resetPassword($usuario, string $password)
