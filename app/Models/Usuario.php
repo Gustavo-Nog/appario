@@ -3,17 +3,20 @@
 namespace App\Models;
 
 use App\Notifications\UsuarioResetPasswordNotification;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+
 use Laravel\Sanctum\HasApiTokens;
 
-
-class Usuario extends Authenticatable
+class Usuario extends Authenticatable implements CanResetPasswordContract
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, CanResetPassword;
 
     protected $primaryKey = 'id_usuario';
 
@@ -45,7 +48,7 @@ class Usuario extends Authenticatable
         );
     }
 
-    public function pessoa()
+    public function pessoa(): HasOne
     {
         return $this->hasOne(Pessoa::class, 'usuario_id', 'id_usuario');
     }
