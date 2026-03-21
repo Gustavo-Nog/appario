@@ -14,7 +14,7 @@ class ResetPasswordController extends Controller
     /**
      * showResetForm: Exibe o formulário de redefinição de senha, passando o token e o e-mail para a view.
      * resetPassword: Atualiza a senha do usuário, hashando a nova senha e gerando novo token
-     * sendRestResponse: Redireciona o usuário para a rota de login.
+     * sendResetResponse: Redireciona o usuário para a rota de login.
      */
 
     public function showResetForm(Request $request, string $token)
