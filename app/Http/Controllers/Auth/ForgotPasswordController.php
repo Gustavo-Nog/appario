@@ -12,7 +12,7 @@ class ForgotPasswordController extends Controller
     {
         if ($request->wantsJson()) {
             return response()->json([
-                'message' => 'Se o e-mail existir, um link de redefinição de senha foi enviado.' 
+                'message' => 'Se o email existir, um link de redefinição de senha será enviado para o seu email.' 
             ], 200);
         } else {
             return view('usuarios.solicitarSenha');
@@ -29,7 +29,7 @@ class ForgotPasswordController extends Controller
 
             return back()->with(
                 'status', 
-                'Se o e-mail existir, um link de redefinição de senha foi enviado.'
+                'Se o email existir, um link de redefinição de senha será enviado para o seu email.'
             );
         } catch (\Throwable $th) {
             if ($request->wantsJson()) {
