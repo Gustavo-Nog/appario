@@ -37,25 +37,25 @@
 
             <div class="row">
                 <div class="col-md-6 mt-3">
-                    <label for="email">Seu Email</label>
+                    <label for="email">Seu Email<span class="required">*</span></label>
                     <input type="email" name="email" class="form-control email" placeholder="Digite seu email" required>
                 </div>
                 <div class="col-md-6 mt-3">
-                    <label for="nome">Seu Nome</label>
-                    <input type="text" name="nome" class="form-control" placeholder="Digite seu nome">
+                    <label for="nome">Seu Nome<span class="required">*</span></label>
+                    <input type="text" name="nome" class="form-control" placeholder="Digite seu nome" required>
                 </div>
 
                 <div class="col-md-6 mt-3">
-                    <label for="password">Sua Senha</label>
+                    <label for="password">Sua Senha<span class="required">*</span></label>
                     <input type="password" name="password" class="form-control" placeholder="Digite sua senha" required>
                 </div>
                 <div class="col-md-6 mt-3">
-                    <label for="sobrenome">Seu Sobrenome</label>
-                    <input type="text" name="sobrenome" class="form-control" placeholder="Digite seu sobrenome">
+                    <label for="sobrenome">Seu Sobrenome<span class="required">*</span></label>
+                    <input type="text" name="sobrenome" class="form-control" placeholder="Digite seu sobrenome" required>
                 </div>
 
                 <div class="col-md-6 mt-3">
-                    <label for="password_confirmation">Confirme sua senha</label>
+                    <label for="password_confirmation">Confirme sua senha<span class="required">*</span></label>
                     <input type="password" name="password_confirmation" class="form-control" placeholder="Confirme sua senha" required>
                 </div>
                 <div class="col-md-6 mt-3">
@@ -63,14 +63,16 @@
                     <input type="text" name="cpf" maxlength="11" class="form-control">
                 </div>
 
+                <!-- 
                 <div class="col-12 mt-3">
                     <label for="tipo">Função</label>
-                    <select name="tipo_pessoa" class="form-select" required>
+                    <select name="tipo_pessoa" class="form-select">
                         <option value="">Selecione...</option>
                         <option value="APICULTOR">APICULTOR</option>
                         <option value="RESPONSAVEL">RESPONSAVEL</option>
                     </select>
                 </div>
+                -->
 
                 <div class="col-12 mt-4">
                     <button type="submit" class="button w-100">Cadastrar</button>
