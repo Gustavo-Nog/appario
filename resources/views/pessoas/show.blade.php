@@ -57,7 +57,7 @@
 
           <div class="info-card">
             <h5>CPF</h5>
-            <div class="info-value">{{ $pessoa->cpf }}</div>
+            <div class="info-value">{{ $pessoa->cpf ?? 'Não informado' }}</div>
           </div>
 
           <div class="info-card">

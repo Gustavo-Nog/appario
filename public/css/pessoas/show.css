@@ -35,13 +35,13 @@ main {
 .info-card h5 {
     margin: 0 0 0.35rem 0;
     font-size: 0.9rem;
-    color: #333;
-    font-weight: 600;
+    color: #555555;
+    font-weight: 400;
 }
 
 .info-value {
     font-size: 1rem;
-    color: #222;
+    color: #000000;
     word-break: break-word;
 }
 
