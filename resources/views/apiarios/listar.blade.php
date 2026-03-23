@@ -24,7 +24,9 @@
 
         {{-- Botões de ação --}}
         <div class="botao-editar" onclick="event.stopPropagation();">
-          <a href="{{ route('apiarios.edit', $apiario->id_apiario) }}" class="btn btn-sm btn-primary">Editar</a>
+          <form action="{{ route('apiarios.edit', $apiario->id_apiario) }}" method="GET">
+            <button type="submit" class="btn btn-sm btn-primary">Editar</button>
+          </form>
 
           <form action="{{ route('apiarios.destroy', $apiario->id_apiario) }}" method="POST" onsubmit="event.stopPropagation(); return confirm('Deseja realmente excluir este apiário?')">
             @csrf
