@@ -33,7 +33,7 @@ class UpdateRequest extends FormRequest
             'nome' => 'sometimes|string|max:100',
             'area' => 'sometimes|numeric|max:50',
             'data_criacao' => 'sometimes|date',
-            'coordenadas' => 'sometimes|string|max:70',
+            'coordenadas' => 'nullable|string|max:70',
 
             // ENDEREÇO
             'logradouro' => 'sometimes|string|max:80',
