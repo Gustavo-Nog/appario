@@ -50,7 +50,18 @@ header {
 }
 
 .email {
-    text-transform: lowercase;
+  text-transform: lowercase;
+}
+
+.botao-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  border: none;
+  border-radius: 100;
+  background-color: transparent;
 }
 
 @media (max-width: 768px) {
