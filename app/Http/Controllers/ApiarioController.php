@@ -129,7 +129,7 @@ class ApiarioController extends Controller
         $apiario = $this->apiarioRepository->findForPessoaOrFail($id_apiario, $id_pessoa);
         
         $this->authorize('update', $apiario);
-        $ufs = (new StoreRequest())->ufs();
+        $ufs = $request->ufs();
         $endereco = $apiario->enderecos;
 
         return view('apiarios.editar', compact('apiario', 'endereco', 'ufs'));

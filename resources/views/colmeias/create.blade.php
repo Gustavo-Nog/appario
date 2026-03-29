@@ -61,4 +61,3 @@
       </form>
     </div>
   @endsection
-      align-items: center;
