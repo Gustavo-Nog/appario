@@ -81,7 +81,7 @@
                 -->
 
                 <div class="col-12 mt-4">
-                    <button type="submit" class="button w-100 botao-cadastrar">Cadastrar</button>
+                    <button type="submit" class="button w-100 botao-cadastrar-entrar">Cadastrar</button>
                 </div>
             </div>
         </form>

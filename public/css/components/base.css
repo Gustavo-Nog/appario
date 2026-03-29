@@ -53,6 +53,10 @@ header {
   text-transform: lowercase;
 }
 
+.botao-cadastrar-entrar:hover {
+  background-color: #45a049;
+}
+
 .botao-toggle {
   position: absolute;
   right: 10px;
