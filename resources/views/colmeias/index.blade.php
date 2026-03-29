@@ -23,6 +23,27 @@
         <div class="colmeia-apiario">
             Apiário: {{ $colmeia->apiario->nome ?? 'Sem apiário' }}
         </div>
+
+        <div>
+          <form 
+            action="{{ route('apiarios.colmeias.edit', [$colmeia->apiario_id, $colmeia->id_colmeia]) }}" 
+            method="GET"
+            class="botao-editar"
+          >
+            <button type="submit" class="btn btn-sm btn-primary mb-1">Editar</button>
+          </form>
+
+          <form 
+            action="{{ route('apiarios.colmeias.destroy', [$colmeia->apiario_id, $colmeia->id_colmeia]) }}" 
+            method="POST" 
+            class="button-delete js-delete-form" 
+            data-confirm-message="Deseja realmente excluir esta colmeia?"
+          >
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+          </form>
+        </div>
       </div>
     @endforeach
   @else

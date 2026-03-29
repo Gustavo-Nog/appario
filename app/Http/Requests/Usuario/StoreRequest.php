@@ -40,7 +40,7 @@ class StoreRequest extends FormRequest
              // CAMPOS DE PESSOA
             'nome' => 'required|string|max:50',
             'sobrenome' => 'required|string|max:50',
-            'cpf' => 'required|string|size:11|unique:pessoas,cpf',
+            'cpf' => 'nullable|string|size:11|unique:pessoas,cpf',
             'tipo_pessoa' => ['nullable', Rule::in(['APICULTOR', 'RESPONSAVEL'])],
         ];
     }

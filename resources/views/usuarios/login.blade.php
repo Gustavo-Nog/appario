@@ -8,8 +8,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="icon" href="{{ asset('img/favicon-32x32.png') }}" type="image/x-icon" />
         <link href="{{ asset('css/components/base.css') }}" rel="stylesheet">
-
         <link href="{{ asset('css/usuarios/login.css') }}" rel="stylesheet">
+        @vite('resources/js/app.js')
     </head>
     <body>
         <header class="header-custom">
@@ -41,7 +41,10 @@
                 @enderror
 
                 <label for="password">Senha:</label>
-                <input type="password" id="password" name="password" required />
+                <div class="input-group mb-3">
+                    <input type="password" name="password" class="form-control" placeholder="Senha" />
+                    <button type="button" class="botao-toggle js-toggle-password" aria-label="Mostrar senha">🙈</button>
+                </div>
                 @error('password')
                     <div style="color:red;">{{ $message }}</div>
                 @enderror
@@ -50,7 +53,7 @@
                     <a href="{{ route('usuarios.solicitarSenha') }}">Esqueceu a senha?</a>
                 </div>
 
-                <button type="submit">Entrar</button>
+                <button type="submit" class="button w-100 botao-cadastrar-entrar">Entrar</button>
             </form>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

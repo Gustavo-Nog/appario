@@ -7,8 +7,8 @@
         <link rel="icon" href="{{ asset('img/favicon-32x32.png') }}" type="image/x-icon" />
         <link href="{{ asset('css/nav.css') }}" rel="stylesheet">
         <link href="{{ asset('css/components/base.css') }}" rel="stylesheet">
-
         <link href="{{ asset('css/usuarios/form_pessoa_usuario.css') }}" rel="stylesheet">
+        @vite('resources/js/app.js')
         <title>Criar Usuário</title>
   </head>
     <body>
@@ -37,43 +37,51 @@
 
             <div class="row">
                 <div class="col-md-6 mt-3">
-                    <label for="email">Seu Email</label>
+                    <label for="email">Seu Email<span class="required">*</span></label>
                     <input type="email" name="email" class="form-control email" placeholder="Digite seu email" required>
                 </div>
                 <div class="col-md-6 mt-3">
-                    <label for="nome">Seu Nome</label>
-                    <input type="text" name="nome" class="form-control" placeholder="Digite seu nome">
+                    <label for="nome">Seu Nome<span class="required">*</span></label>
+                    <input type="text" name="nome" class="form-control" placeholder="Digite seu nome" required>
                 </div>
 
                 <div class="col-md-6 mt-3">
-                    <label for="password">Sua Senha</label>
-                    <input type="password" name="password" class="form-control" placeholder="Digite sua senha" required>
+                    <label for="password">Sua Senha<span class="required">*</span></label>
+                    <div class="input-group">
+                        <input type="password" name="password" class="form-control" placeholder="Senha" />
+                        <button type="button" class="botao-toggle js-toggle-password" aria-label="Mostrar senha">🙈</button>
+                    </div>
                 </div>
                 <div class="col-md-6 mt-3">
-                    <label for="sobrenome">Seu Sobrenome</label>
-                    <input type="text" name="sobrenome" class="form-control" placeholder="Digite seu sobrenome">
+                    <label for="sobrenome">Seu Sobrenome<span class="required">*</span></label>
+                    <input type="text" name="sobrenome" class="form-control" placeholder="Digite seu sobrenome" required>
                 </div>
 
                 <div class="col-md-6 mt-3">
-                    <label for="password_confirmation">Confirme sua senha</label>
-                    <input type="password" name="password_confirmation" class="form-control" placeholder="Confirme sua senha" required>
+                    <label for="password_confirmation">Confirme sua senha<span class="required">*</span></label>
+                    <div class="input-group">
+                        <input type="password" name="password_confirmation" class="form-control" placeholder="Confirme sua senha" required>
+                        <button type="button" class="botao-toggle js-toggle-password" aria-label="Mostrar senha">🙈</button>
+                    </div>
                 </div>
                 <div class="col-md-6 mt-3">
                     <label for="cpf">Seu CPF</label>
                     <input type="text" name="cpf" maxlength="11" class="form-control">
                 </div>
 
+                <!-- 
                 <div class="col-12 mt-3">
                     <label for="tipo">Função</label>
-                    <select name="tipo_pessoa" class="form-select" required>
+                    <select name="tipo_pessoa" class="form-select">
                         <option value="">Selecione...</option>
                         <option value="APICULTOR">APICULTOR</option>
                         <option value="RESPONSAVEL">RESPONSAVEL</option>
                     </select>
                 </div>
+                -->
 
                 <div class="col-12 mt-4">
-                    <button type="submit" class="button w-100">Cadastrar</button>
+                    <button type="submit" class="button w-100 botao-cadastrar-entrar">Cadastrar</button>
                 </div>
             </div>
         </form>

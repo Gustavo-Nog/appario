@@ -39,7 +39,7 @@
             {{-- Coordenadas --}}
             <div class="mb-3">
               <label for="coordenadas">Coordenadas (GPS)</label>
-              <input type="text" class="form-control @error('coordenadas') is-invalid @enderror" id="coordenadas" name="coordenadas" value="{{ old('coordenadas') }}"/>
+              <input type="text" class="form-control @error('coordenadas') is-invalid @enderror" id="coordenadas" name="coordenadas" value="{{ old('coordenadas') }}" placeholder="Latitude, Longitude (ex: 00.0000, 00.0000)"/>
               @error('coordenadas')
                 <div class="invalid-feedback">{{ $message }}</div>
               @enderror
@@ -110,7 +110,7 @@
             {{-- CEP --}}
             <div class="mb-3">
               <label for="cep">CEP<span style="color: red">*</span></label>
-              <input type="text" class="form-control @error('cep') is-invalid @enderror" id="cep" name="cep" value="{{ old('cep') }}" required maxlength="10" />
+              <input type="text" class="form-control @error('cep') is-invalid @enderror" id="cep" name="cep" value="{{ old('cep') }}" required maxlength="10" placeholder="00000-000"/>
               @error('cep')
                 <div class="invalid-feedback">{{ $message }}</div>
               @enderror
