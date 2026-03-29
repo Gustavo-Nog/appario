@@ -46,10 +46,6 @@ label {
     transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #45a049;
-}
-
 table {
     border-collapse: collapse;
     width: 60%;

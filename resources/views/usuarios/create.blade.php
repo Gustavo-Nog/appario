@@ -7,8 +7,8 @@
         <link rel="icon" href="{{ asset('img/favicon-32x32.png') }}" type="image/x-icon" />
         <link href="{{ asset('css/nav.css') }}" rel="stylesheet">
         <link href="{{ asset('css/components/base.css') }}" rel="stylesheet">
-
         <link href="{{ asset('css/usuarios/form_pessoa_usuario.css') }}" rel="stylesheet">
+        @vite('resources/js/app.js')
         <title>Criar Usuário</title>
   </head>
     <body>
@@ -47,7 +47,10 @@
 
                 <div class="col-md-6 mt-3">
                     <label for="password">Sua Senha<span class="required">*</span></label>
-                    <input type="password" name="password" class="form-control" placeholder="Digite sua senha" required>
+                    <div class="input-group">
+                        <input type="password" name="password" class="form-control" placeholder="Senha" />
+                        <button type="button" class="botao-toggle js-toggle-password" aria-label="Mostrar senha">🙈</button>
+                    </div>
                 </div>
                 <div class="col-md-6 mt-3">
                     <label for="sobrenome">Seu Sobrenome<span class="required">*</span></label>
@@ -56,7 +59,10 @@
 
                 <div class="col-md-6 mt-3">
                     <label for="password_confirmation">Confirme sua senha<span class="required">*</span></label>
-                    <input type="password" name="password_confirmation" class="form-control" placeholder="Confirme sua senha" required>
+                    <div class="input-group">
+                        <input type="password" name="password_confirmation" class="form-control" placeholder="Confirme sua senha" required>
+                        <button type="button" class="botao-toggle js-toggle-password" aria-label="Mostrar senha">🙈</button>
+                    </div>
                 </div>
                 <div class="col-md-6 mt-3">
                     <label for="cpf">Seu CPF</label>
@@ -75,7 +81,7 @@
                 -->
 
                 <div class="col-12 mt-4">
-                    <button type="submit" class="button w-100">Cadastrar</button>
+                    <button type="submit" class="button w-100 botao-cadastrar-entrar">Cadastrar</button>
                 </div>
             </div>
         </form>
