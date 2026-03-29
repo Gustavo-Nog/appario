@@ -2,7 +2,6 @@
 
 @section('title', 'Apiários')
 <link href="{{ asset('css/apiarios/listar.css') }}" rel="stylesheet">
-
 @section('content')
 
   <div class="page-title">Apiários já adicionados</div>
@@ -28,7 +27,7 @@
             <button type="submit" class="btn btn-sm btn-primary">Editar</button>
           </form>
 
-          <form action="{{ route('apiarios.destroy', $apiario->id_apiario) }}" method="POST" onsubmit="event.stopPropagation(); return confirm('Deseja realmente excluir este apiário?')">
+          <form action="{{ route('apiarios.destroy', $apiario->id_apiario) }}" method="POST" class="button-delete" data-confirm-message="Deseja realmente excluir este apiário?">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
