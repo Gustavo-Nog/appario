@@ -126,7 +126,7 @@ class ColmeiaController extends Controller
         }
     }
 
-    public function edit(int $id_colmeia, int $id_apiario, Request $request)
+    public function edit(int $id_apiario, int $id_colmeia, Request $request)
     {
         $pessoa = $request->attributes->get('pessoa');
         $id_pessoa = $pessoa->id_pessoa;
@@ -138,7 +138,7 @@ class ColmeiaController extends Controller
         return view('colmeias.editar', compact('colmeia', 'apiarios'));
     }
 
-    public function update(int $id_colmeia, int $id_apiario, UpdateRequest $request)
+    public function update(int $id_apiario, int $id_colmeia, UpdateRequest $request)
     {
         $pessoa = $request->attributes->get('pessoa');
         $id_pessoa = $pessoa->id_pessoa;
@@ -177,7 +177,7 @@ class ColmeiaController extends Controller
         }
     }
 
-    public function destroy(int $id_colmeia, int $id_apiario, Request $request)
+    public function destroy(int $id_apiario, int $id_colmeia, Request $request)
     {
         $pessoa = $request->attributes->get('pessoa');
         $id_pessoa = $pessoa->id_pessoa;
