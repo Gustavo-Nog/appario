@@ -1,18 +1,16 @@
 .form-wrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 90px);
   flex-direction: column;
 }
 
-form.colmeia-form {
+.colmeia-form {
   background-color: #ffffff;
   padding: 25px;
   border-radius: 10px;
+  box-shadow: 0 4px 8px #f5c802;
   max-width: 760px;
   width: 90%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 label {
