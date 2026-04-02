@@ -71,7 +71,7 @@
     @endauth
   </header>
 
-  <main class="py-4 position-relative z-1">
+  <main class="py-4 position-relative z-2">
     @yield('content')
   </main>
 
