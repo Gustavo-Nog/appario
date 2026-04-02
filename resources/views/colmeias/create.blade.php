@@ -44,7 +44,7 @@
         {{-- Apiário --}}
         <div>
           <label for="apiario_id" class="form-label">Apiário<span style="color: red">*</span></label>
-          <select class="form-select @error('apiario_id') is-invalid @enderror" id="apiario_id" name="apiario_id" required>
+          <select class="mb-2 form-select @error('apiario_id') is-invalid @enderror" id="apiario_id" name="apiario_id" required>
             <option value="">Selecione...</option>
             @foreach($apiarios as $apiario)
               <option value="{{ $apiario->id_apiario }}" {{ old('apiario_id') == $apiario->id_apiario ? 'selected' : '' }}>
