@@ -6,7 +6,8 @@
 @section('content')
 <div class="form-wrapper">
     <form method="POST" action="{{ route('apiarios.colmeias.update', [$colmeia->apiario_id, $colmeia->id_colmeia]) }}" class="colmeia-form">
-        <h1 class="text-center mb-4">Editar colmeia de N° {{ $colmeia->id_colmeia }}</h1>
+        <h1 class="text-center mb-2">Editar colmeia</h1>
+        <hr class="separator"/>
         @csrf
         @method('PUT')
 

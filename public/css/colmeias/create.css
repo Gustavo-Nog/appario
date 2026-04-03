@@ -13,6 +13,12 @@
   width: 90%;
 }
 
+.separator {
+  height: 2px;
+  background-color: #000000;
+  opacity: 0.75;
+}
+
 label {
   display: block;
   margin-bottom: 5px;
