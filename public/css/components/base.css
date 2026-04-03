@@ -53,6 +53,10 @@ header {
   text-transform: lowercase;
 }
 
+.email::placeholder {
+  text-transform: none;
+}
+
 .botao-cadastrar-entrar:hover {
   background-color: #45a049;
 }
