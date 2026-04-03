@@ -14,10 +14,10 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'especie' => 'sometimes|string|max:50',
-            'tamanho' => 'sometimes|string|max:35',
-            'data_aquisicao' => 'sometimes|date',
-            'apiario_id' => 'sometimes|integer|exists:apiarios,id_apiario',
+            'especie' => 'required|string|max:50',
+            'tamanho' => 'required|string|max:35',
+            'data_aquisicao' => 'required|date',
+            'apiario_id' => 'required|integer|exists:apiarios,id_apiario',
         ];
     }
 

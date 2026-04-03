@@ -19,6 +19,7 @@
                 name="especie"
                 class="form-control @error('especie') is-invalid @enderror"
                 value="{{ old('especie', $colmeia->especie) }}"
+                required
             >
             @error('especie')
                 <div class="invalid-feedback">{{ $message }}</div>
@@ -36,7 +37,7 @@
         <div>
             <label for="data_aquisicao">Data de Aquisição</label>
             <input 
-                type="text" 
+                type="date" 
                 class="form-control @error('data_aquisicao') is-invalid @enderror" name="data_aquisicao" id="data_aquisicao" 
                 value="{{ old('data_aquisicao', $colmeia->data_aquisicao ? \Carbon\Carbon::parse($colmeia->data_aquisicao)->format('Y-m-d') : '') }}" required 
             />
