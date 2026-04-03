@@ -12,7 +12,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px #f5c802;;
   flex-wrap: wrap;
   transition: background-color 0.2s ease;
 }
