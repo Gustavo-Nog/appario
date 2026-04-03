@@ -36,37 +36,37 @@
             <a href="{{ route('login.form') }}">Já tenho conta</a>
 
             <div class="row">
-                <div class="col-md-6 mt-3">
+                <div class="col-md-6 mt-3 field-email">
                     <label for="email">Seu Email<span class="required">*</span></label>
                     <input type="email" name="email" class="form-control email" placeholder="Digite seu email" required>
                 </div>
-                <div class="col-md-6 mt-3">
+                <div class="col-md-6 mt-3 field-nome">
                     <label for="nome">Seu Nome<span class="required">*</span></label>
                     <input type="text" name="nome" class="form-control" placeholder="Digite seu nome" required>
                 </div>
 
-                <div class="col-md-6 mt-3">
+                <div class="col-md-6 mt-3 field-password">
                     <label for="password">Sua Senha<span class="required">*</span></label>
                     <div class="input-group">
-                        <input type="password" name="password" class="form-control" placeholder="Senha" />
+                        <input type="password" name="password" class="form-control" placeholder="Digite sua senha" />
                         <button type="button" class="botao-toggle js-toggle-password" aria-label="Mostrar senha">🙈</button>
                     </div>
                 </div>
-                <div class="col-md-6 mt-3">
+                <div class="col-md-6 mt-3 field-sobrenome">
                     <label for="sobrenome">Seu Sobrenome<span class="required">*</span></label>
                     <input type="text" name="sobrenome" class="form-control" placeholder="Digite seu sobrenome" required>
                 </div>
 
-                <div class="col-md-6 mt-3">
+                <div class="col-md-6 mt-3 field-password-confirm">
                     <label for="password_confirmation">Confirme sua senha<span class="required">*</span></label>
                     <div class="input-group">
                         <input type="password" name="password_confirmation" class="form-control" placeholder="Confirme sua senha" required>
                         <button type="button" class="botao-toggle js-toggle-password" aria-label="Mostrar senha">🙈</button>
                     </div>
                 </div>
-                <div class="col-md-6 mt-3">
+                <div class="col-md-6 mt-3 field-cpf">
                     <label for="cpf">Seu CPF</label>
-                    <input type="text" name="cpf" maxlength="11" class="form-control">
+                    <input type="text" name="cpf" maxlength="11" class="form-control" placeholder="Digite seu CPF (Opcional)">
                 </div>
 
                 <!-- 
@@ -80,7 +80,7 @@
                 </div>
                 -->
 
-                <div class="col-12 mt-4">
+                <div class="col-12 mt-4 field-submit">
                     <button type="submit" class="button w-100 botao-cadastrar-entrar">Cadastrar</button>
                 </div>
             </div>
