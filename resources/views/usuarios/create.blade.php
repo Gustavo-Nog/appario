@@ -12,12 +12,14 @@
         <title>Criar Usuário</title>
   </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-custom">
-            <div class="container-fluid">
-                <img src="{{ asset('img/appAriologo.png') }}" alt="Logo Appário" width="60" height="60" class="d-inline-block align-text-top me-2">
-                <h1 class="navbar-title m-0">CADASTRO</h1>
+        <header class="navbar navbar-expand-lg navbar-custom">
+           <div class="container-fluid header-content">
+                <div class="header-left">
+                    <img src="{{ asset('img/appAriologo.png') }}" alt="Logo Appário" width="50" height="50">
+                </div>
+                <h1 class="navbar-title">Cadastro</h1>
             </div>
-        </nav>
+        </header>
 
         <form method="POST" action="{{ route('usuarios.store') }}" class="w-100 px-3 px-sm-5" style="max-width: 800px;">
             @csrf
