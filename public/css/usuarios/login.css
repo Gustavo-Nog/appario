@@ -27,11 +27,13 @@ header.header-custom {
 
 .header-title {
     color: #ffffff;
-    font-size: 30px;
+    position: absolute;
+    left: 50%;
+    font-size: 38px;
+    transform: translate(-50%);
+    text-align: center;
     font-weight: bold;
-    position: fixed;
-    left: 47%;
-
+    flex-grow: 1;
 }
 
 .login-container {

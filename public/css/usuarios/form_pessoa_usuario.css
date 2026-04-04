@@ -10,11 +10,26 @@
     color: #ffffff;
     position: absolute;
     left: 50%;
-    font-size: 48px;
+    font-size: 38px;
     transform: translate(-50%);
     text-align: center;
     font-weight: bold;
     flex-grow: 1;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left img {
+    margin-right: 10px;
 }
 
 form {
