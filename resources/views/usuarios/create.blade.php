@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="icon" href="{{ asset('img/favicon-32x32.png') }}" type="image/x-icon" />
-        <link href="{{ asset('css/nav.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/components/nav.css') }}" rel="stylesheet">
         <link href="{{ asset('css/components/base.css') }}" rel="stylesheet">
         <link href="{{ asset('css/usuarios/form_pessoa_usuario.css') }}" rel="stylesheet">
         @vite('resources/js/app.js')
@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-md-6 mt-3 field-cpf">
                     <label for="cpf">Seu CPF</label>
-                    <input type="text" name="cpf" maxlength="11" class="form-control" placeholder="Digite seu CPF (Opcional)">
+                    <input type="text" name="cpf" maxlength="14" class="form-control cpf" placeholder="000.000.000-00 (opcional)">
                 </div>
 
                 <!-- 

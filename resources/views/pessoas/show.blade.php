@@ -6,6 +6,7 @@
 @push('styles')
 <link href="{{ asset('css/pessoas/show.css') }}" rel="stylesheet" />
 @endpush
+@vite('resources/js/app.js')
 
 @section('content')
   <div class="container-fluid titulo mb-3">
@@ -57,7 +58,7 @@
 
           <div class="info-card">
             <h5>CPF</h5>
-            <div class="info-value">{{ $pessoa->cpf ?? 'Não informado' }}</div>
+            <div class="info-value cpf">{{ $pessoa->cpf ?? 'Não informado' }}</div>
           </div>
 
           <div class="info-card">
