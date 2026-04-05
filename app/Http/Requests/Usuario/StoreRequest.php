@@ -21,6 +21,12 @@ class StoreRequest extends FormRequest
                 'email' => Str::lower($this->email), 
             ]);
         }
+
+        if ($this->has('cpf')) {
+            $this->merge([
+                'cpf' => preg_replace('/\D/', '', $this->cpf),
+            ]);
+        }
     }
 
     public function rules(): array
