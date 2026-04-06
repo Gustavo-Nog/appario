@@ -2,8 +2,8 @@
 
 @section('title', 'Editar Perfil')
 
-<!-- CSS específico da view (link direto) -->
 <link href="{{ asset('css/pessoas/edit.css') }}" rel="stylesheet">
+@vite('resources/js/app.js')
 
 @section('content')
   <div class="container">
@@ -12,6 +12,10 @@
       <form action="{{ route('pessoas.update', $pessoa->id_pessoa) }}" method="POST" novalidate class="pessoa-form">
         @csrf
         @method('PUT')
+        @php 
+          $cpf = $pessoa->cpf ?? '';
+          $cpfFormatado = preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', '$1.$2.$3-$4', $cpf);
+        @endphp
 
         <div class="row">
           <div class="col-md-6">
@@ -33,7 +37,7 @@
 
             <div class="mb-3">
               <label for="cpf" class="form-label">CPF</label>
-              <input type="text" class="form-control @error('cpf') is-invalid @enderror" id="cpf" name="cpf" value="{{ old('cpf', $pessoa->cpf) }}" maxlength="11" minlength="11" required />
+              <input type="text" class="form-control @error('cpf') is-invalid @enderror cpf" id="cpf" name="cpf" value="{{ old('cpf', $cpfFormatado) }}" maxlength="14" minlength="14" required />
               @error('cpf')
                 <div class="invalid-feedback">{{ $message }}</div>
               @enderror
