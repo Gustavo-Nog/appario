@@ -9,6 +9,9 @@ use App\Http\Requests\Apiario\StoreRequest;
 use App\Http\Requests\Apiario\UpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ApiarioController extends Controller
 {
@@ -21,7 +24,7 @@ class ApiarioController extends Controller
         $this->apiarioRelatorio = $apiarioRelatorio;
     }
 
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse|View
     {
         try {
             $pessoa = $request->attributes->get('pessoa');
@@ -47,13 +50,13 @@ class ApiarioController extends Controller
         
     }
 
-    public function create()
+    public function create(): View
     {
         $ufs = (new StoreRequest())->ufs();
         return view('apiarios.adicionar', compact('ufs'));
     }
 
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request): JsonResponse|RedirectResponse
     {
         $this->authorize('create', Apiario::class);
 
@@ -90,24 +93,30 @@ class ApiarioController extends Controller
         }
     }
 
-    public function show(int $id_apiario, Request $request)
+    public function show(int $id_apiario, Request $request): JsonResponse|View|RedirectResponse
     {
         $pessoa = $request->attributes->get('pessoa');
         $id_pessoa = $pessoa->id_pessoa;
 
         try {
             $apiario = $this->apiarioRepository->findForPessoaOrFail($id_apiario, $id_pessoa);
-
+            $endereco = $apiario->enderecos;
+            $ufs = $endereco ? array_merge(
+                $endereco->toArray(),
+                ['estado_nome' => $endereco->estado_nome]
+            ) : [];
             $this->authorize('view', $apiario);
 
             if ($request->wantsJson()) {
                 return response()->json([
-                    'status' => 'success',
-                    'data'   => $apiario
+                    'status'   => 'success',
+                    'apiario'  => $apiario,
+                    'endereco' => $endereco,
+                    'ufs'      => $ufs
                 ], 200);
             }
 
-            return view('apiarios.mostrar', compact('apiario'));
+            return view('apiarios.mostrar', compact('apiario', 'endereco', 'ufs'));
         } catch (\Throwable $th) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -122,7 +131,7 @@ class ApiarioController extends Controller
 
     }
 
-    public function edit(int $id_apiario, UpdateRequest $request)
+    public function edit(int $id_apiario, UpdateRequest $request): View
     {
         $pessoa = $request->attributes->get('pessoa');
         $id_pessoa = $pessoa->id_pessoa;
@@ -135,7 +144,7 @@ class ApiarioController extends Controller
         return view('apiarios.editar', compact('apiario', 'endereco', 'ufs'));
     }
 
-    public function update(int $id_apiario, UpdateRequest $request)
+    public function update(int $id_apiario, UpdateRequest $request): JsonResponse|RedirectResponse
     {
         $pessoa = $request->attributes->get('pessoa');
         $id_pessoa = $pessoa->id_pessoa;
@@ -175,7 +184,7 @@ class ApiarioController extends Controller
         }
     }
 
-    public function destroy(int $id_apiario, Request $request)
+    public function destroy(int $id_apiario, Request $request): JsonResponse|RedirectResponse
     {
         $pessoa = $request->attributes->get('pessoa');
         $id_pessoa = $pessoa->id_pessoa;
