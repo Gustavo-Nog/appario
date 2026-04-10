@@ -6,7 +6,7 @@
 @section('content')
 <div class="container mt-2">
 
-    <div class="card p-3 mb-2">
+    <div class="card card-apiario p-3 mb-2">
         <h3 class="card-title d-flex justify-content-center pb-3">Informações Gerais</h3>
         <div class="row">
             <div class="col-6 container-apiario">
@@ -32,43 +32,56 @@
                 </h1>
             </div>
         </div>
-        
-        
     </div>
 
-    <div class="card p-3 mb-2">
+    <div class="card card-apiario-endereco p-3 mb-2">
         <h3 class="card-title d-flex justify-content-center">Endereço</h3>
-        @if($apiario->endereco)
-            <div class="endereco">
-                <p> {{ $apiario->endereco->estado }}</p>
+        @if($endereco)
+            <div class="row">
+            <div class="col-12 col-md-6">
+                 <div class="endereco">
+                    <p class="info-apiario">Estado: </p>
+                    <p class="info-value-apiario"> {{ $endereco->estado_nome ?? $endereco->estado ?? 'Não informado' }}</p>
+                </div>
+                <div class="endereco">
+                    <p class="info-apiario">Cidade: </p>
+                    <p class="info-value-apiario"> {{ $endereco->cidade ?? 'Não informado' }}</p>
+                </div>
+                <div class="endereco">
+                    <p class="info-apiario">Bairro: </p>
+                    <p class="info-value-apiario"> {{ $endereco->bairro ?? 'Não informado' }}</p>
+                </div>
+                <div class="endereco">
+                    <p class="info-apiario">CEP: </p>
+                    <p class="info-value-apiario"> {{ $endereco->cep ?? 'Não informado' }}</p>
+                </div>
             </div>
-            <div class="endereco">
-                <p> {{ $apiario->endereco->cidade }}</p>
+            
+            <div class="col-12 col-md-6">
+                <div class="endereco">
+                    <p class="info-apiario">Logradouro: </p>
+                    <p class="info-value-apiario"> {{ $endereco->logradouro  ?? 'Não informado' }}</p>
+                </div>
+                <div class="endereco">
+                    <p class="info-apiario">Número: </p>
+                    <p class="info-value-apiario"> {{ $endereco->numero ?? 'Não informado' }}</p>
+                </div>
+                <div class="endereco">
+                    <p class="info-apiario">Complemento: </p>
+                    <p class="info-value-apiario"> {{ $endereco->complemento ?? 'Não informado' }}</p>
+                </div>
             </div>
-            <div class="endereco">
-                <p> {{ $apiario->endereco->logradouro }}</p>
-            </div>
-            <div class="endereco">
-                <p> {{ $apiario->endereco->numero }}</p>
-            </div>
-            <div class="endereco">
-                <p> {{ $apiario->endereco->numero }}</p>
-            </div>
-            <div class="endereco">
-                <p> {{ $apiario->endereco->complemento ?? '---' }}</p>
-            </div>
-            <div class="endereco">
-                <p> {{ $apiario->endereco->bairro }}</p>
-            </div>
-            <div class="endereco">
-                <p> {{ $apiario->endereco->cep }}</p>
             </div>
         @else
-            <p>Nenhum endereço cadastrado.</p>
+            <h5 class="d-flex text-center">Nenhum endereço cadastrado.</h5>
         @endif
     </div>
 
-    <a href="{{ route('apiarios.index') }}" class="btn btn-secondary mt-3">Voltar</a>
+    <div class="container-botoes">
+        <a href="{{ route('apiarios.index') }}" class="btn btn-danger btn-voltar">Voltar</a>
+        <a href="{{ route('apiarios.edit', $apiario->id_apiario) }}" class="btn btn-primary btn-editar">Editar</a>
+    </div>
+
 
 </div>
 @endsection
