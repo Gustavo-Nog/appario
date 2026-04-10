@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Apiario;
-use App\Models\EnderecoApiario;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 
@@ -16,7 +16,7 @@ class ApiarioRepository
         $this->apiarioModel = $apiarioModel;
     }
 
-    public function getApiarioByPessoa(int $pessoa_id)
+    public function getApiarioByPessoa(int $pessoa_id): Collection
     {
         return $this->apiarioModel
             ->with('enderecos', 'colmeias')
@@ -26,7 +26,7 @@ class ApiarioRepository
             ->get();
     }
 
-    public function findForPessoaOrFail(int $id_apiario, int $pessoa_id)
+    public function findForPessoaOrFail(int $id_apiario, int $pessoa_id): Apiario
     {
         return $this->apiarioModel
             ->where('id_apiario', $id_apiario)
@@ -43,7 +43,7 @@ class ApiarioRepository
         return $apiario;
     }
 
-    public function createApiario(array $data) 
+    public function createApiario(array $data): Apiario
     {
         DB::beginTransaction();
         try {
@@ -107,7 +107,7 @@ class ApiarioRepository
         }
     }
 
-    public function deleteApiario(int $id_apiario, int $pessoa_id) 
+    public function deleteApiario(int $id_apiario, int $pessoa_id): bool
     {
         $apiario = $this->findForPessoaOrFail($id_apiario, $pessoa_id);
         return (bool) $apiario->delete();
