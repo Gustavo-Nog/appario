@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Apiario extends Model
 {   
@@ -20,13 +22,13 @@ class Apiario extends Model
     ];
 
     // Relação com pessoa (1:N)
-    public function pessoa()
+    public function pessoa(): BelongsTo
     {
         return $this->belongsTo(Pessoa::class, 'pessoa_id', 'id_pessoa');
     }
 
     // Relação com endereço (1:1)
-    public function enderecos()
+    public function enderecos(): HasOne
     {
         return $this->hasOne(EnderecoApiario::class, 'apiario_id', 'id_apiario');
     }

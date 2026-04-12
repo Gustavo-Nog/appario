@@ -5,19 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="icon" href="{{ asset('img/favicon-32x32.png') }}" type="image/x-icon" />
-        <link href="{{ asset('css/nav.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/components/nav.css') }}" rel="stylesheet">
         <link href="{{ asset('css/components/base.css') }}" rel="stylesheet">
         <link href="{{ asset('css/usuarios/form_pessoa_usuario.css') }}" rel="stylesheet">
         @vite('resources/js/app.js')
         <title>Criar Usuário</title>
   </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-custom">
-            <div class="container-fluid">
-                <img src="{{ asset('img/appAriologo.png') }}" alt="Logo Appário" width="60" height="60" class="d-inline-block align-text-top me-2">
-                <h1 class="navbar-title m-0">CADASTRO</h1>
+        <header class="navbar navbar-expand-lg navbar-custom">
+           <div class="container-fluid header-content">
+                <div class="header-left">
+                    <img src="{{ asset('img/appAriologo.png') }}" alt="Logo Appário" width="50" height="50">
+                </div>
+                <h1 class="navbar-title">Cadastro</h1>
             </div>
-        </nav>
+        </header>
 
         <form method="POST" action="{{ route('usuarios.store') }}" class="w-100 px-3 px-sm-5" style="max-width: 800px;">
             @csrf
@@ -36,37 +38,37 @@
             <a href="{{ route('login.form') }}">Já tenho conta</a>
 
             <div class="row">
-                <div class="col-md-6 mt-3">
+                <div class="col-md-6 mt-3 field-email">
                     <label for="email">Seu Email<span class="required">*</span></label>
                     <input type="email" name="email" class="form-control email" placeholder="Digite seu email" required>
                 </div>
-                <div class="col-md-6 mt-3">
+                <div class="col-md-6 mt-3 field-nome">
                     <label for="nome">Seu Nome<span class="required">*</span></label>
                     <input type="text" name="nome" class="form-control" placeholder="Digite seu nome" required>
                 </div>
 
-                <div class="col-md-6 mt-3">
+                <div class="col-md-6 mt-3 field-password">
                     <label for="password">Sua Senha<span class="required">*</span></label>
                     <div class="input-group">
-                        <input type="password" name="password" class="form-control" placeholder="Senha" />
+                        <input type="password" name="password" class="form-control" placeholder="Digite sua senha" />
                         <button type="button" class="botao-toggle js-toggle-password" aria-label="Mostrar senha">🙈</button>
                     </div>
                 </div>
-                <div class="col-md-6 mt-3">
+                <div class="col-md-6 mt-3 field-sobrenome">
                     <label for="sobrenome">Seu Sobrenome<span class="required">*</span></label>
                     <input type="text" name="sobrenome" class="form-control" placeholder="Digite seu sobrenome" required>
                 </div>
 
-                <div class="col-md-6 mt-3">
+                <div class="col-md-6 mt-3 field-password-confirm">
                     <label for="password_confirmation">Confirme sua senha<span class="required">*</span></label>
                     <div class="input-group">
                         <input type="password" name="password_confirmation" class="form-control" placeholder="Confirme sua senha" required>
                         <button type="button" class="botao-toggle js-toggle-password" aria-label="Mostrar senha">🙈</button>
                     </div>
                 </div>
-                <div class="col-md-6 mt-3">
+                <div class="col-md-6 mt-3 field-cpf">
                     <label for="cpf">Seu CPF</label>
-                    <input type="text" name="cpf" maxlength="11" class="form-control">
+                    <input type="text" name="cpf" maxlength="14" class="form-control cpf" placeholder="000.000.000-00 (opcional)">
                 </div>
 
                 <!-- 
@@ -80,7 +82,7 @@
                 </div>
                 -->
 
-                <div class="col-12 mt-4">
+                <div class="col-12 mt-4 field-submit">
                     <button type="submit" class="button w-100 botao-cadastrar-entrar">Cadastrar</button>
                 </div>
             </div>

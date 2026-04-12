@@ -12,6 +12,15 @@ class UpdateRequest extends FormRequest
         return true;
     }
 
+    public function prepareForValidation()
+    {
+        if ($this->has('cpf')) {
+            $this->merge([
+                'cpf' => preg_replace('/\D/', '', $this->cpf),
+            ]);
+        }
+    }
+
         public function ufs(): array 
     {
         return [

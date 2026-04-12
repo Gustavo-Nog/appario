@@ -12,7 +12,8 @@
     <div class="form-wrapper">
       <form method="POST" action="{{ route('colmeias.store') }}" class="colmeia-form">
         @csrf
-        <h1 class="text-center mb-4">Informe os dados da Colmeia</h1>
+        <h1 class="text-center mb-4">Cadastrar Colmeia</h1>
+        <hr class="separator"/>
 
         {{-- Espécie --}}
         <div>
@@ -44,7 +45,7 @@
         {{-- Apiário --}}
         <div>
           <label for="apiario_id" class="form-label">Apiário<span style="color: red">*</span></label>
-          <select class="form-select @error('apiario_id') is-invalid @enderror" id="apiario_id" name="apiario_id" required>
+          <select class="mb-2 form-select @error('apiario_id') is-invalid @enderror" id="apiario_id" name="apiario_id" required>
             <option value="">Selecione...</option>
             @foreach($apiarios as $apiario)
               <option value="{{ $apiario->id_apiario }}" {{ old('apiario_id') == $apiario->id_apiario ? 'selected' : '' }}>

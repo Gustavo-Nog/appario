@@ -38,3 +38,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.cpf').forEach(el => {
+    const input = el.tagName === 'INPUT' ? el : el.querySelector('input');
+
+    if (!input) {
+      const divCpf = (el.textContent || '').replace(/\D/g, '');
+      if (divCpf.length === 11) {
+        el.textContent = divCpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
+      }
+      return;
+    }
+
+    const formatCpf = (value) => {
+      const digits = value.replace(/\D/g, '').slice(0, 11);
+      if (digits.length <= 3) return digits;
+      if (digits.length <= 6) return `${digits.slice(0,3)}.${digits.slice(3)}`;
+      if (digits.length <= 9) return `${digits.slice(0,3)}.${digits.slice(3,6)}.${digits.slice(6)}`;
+      return `${digits.slice(0,3)}.${digits.slice(3,6)}.${digits.slice(6,9)}-${digits.slice(9,11)}`;
+    };
+
+    input.addEventListener('input', () => {
+      input.value = formatCpf(input.value);
+    });
+
+    const form = input.closest('form');
+    if (form) {
+      form.addEventListener('submit', () => {
+        input.value = input.value.replace(/\D/g, ''); 
+      });
+    }
+  });
+});

@@ -10,11 +10,26 @@
     color: #ffffff;
     position: absolute;
     left: 50%;
-    font-size: 48px;
+    font-size: 38px;
     transform: translate(-50%);
     text-align: center;
     font-weight: bold;
     flex-grow: 1;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left img {
+    margin-right: 10px;
 }
 
 form {
@@ -81,4 +96,17 @@ th {
         margin: auto;
         box-shadow: 0 4px 8px #f5c802;
     }
+
+    .row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .field-nome { order: 1; }
+    .field-sobrenome { order: 2; }
+    .field-email { order: 3; }
+    .field-password { order: 4; }
+    .field-password-confirm { order: 5; }
+    .field-cpf { order: 6; }
+    .field-submit { order: 7; }
 }
