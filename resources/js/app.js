@@ -71,3 +71,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.cep').forEach(el => {
+    const input = el.tagName === 'INPUT' ? el : el.querySelector('input');
+    
+    if (!input) {
+      const divCep = (el.textContent || '').replace(/\D/g, '');
+      if (divCep.length === 8) {
+        el.textContent = divCep.replace(/^(\d{5})(\d{3})$/, '$1-$2');
+      }
+      return;
+    }
+
+    const formatCep = (value) => {
+      const digits = value.replace(/\D/g, '').slice(0, 8);
+      if (digits.length <= 5) return digits;
+      if (digits.length <= 8) return `${digits.slice(0,5)}-${digits.slice(5,8)}`;
+      return `${digits.slice(0,5)}-${digits.slice(5,8)}`;
+    };
+
+    input.value = formatCep(input.value);
+
+    input.addEventListener('input', () => {
+      input.value = formatCep(input.value);
+    });
+
+    const form = input.closest('form');
+    if (form) {
+      form.addEventListener('submit', () => {
+        input.value = input.value.replace(/\D/g, ''); 
+      });
+    }
+  });
+});
