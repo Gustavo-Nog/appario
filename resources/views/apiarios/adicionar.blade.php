@@ -75,7 +75,7 @@
 
             <div class="col-md-6 col-12 field-cep">
               <label for="cep">CEP<span style="color: red">*</span></label>
-              <input type="text" class="form-control @error('cep') is-invalid @enderror" id="cep" name="cep" value="{{ old('cep') }}" required maxlength="10" placeholder="00000-000"/>
+              <input type="text" class="cep form-control @error('cep') is-invalid @enderror" id="cep" name="cep" value="{{ old('cep') }}" required maxlength="9" placeholder="00000-000"/>
               @error('cep')
                 <div class="invalid-feedback">{{ $message }}</div>
               @enderror

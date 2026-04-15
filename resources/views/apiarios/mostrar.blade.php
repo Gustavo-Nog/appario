@@ -53,7 +53,7 @@
                 </div>
                 <div class="endereco">
                     <p class="info-apiario">CEP: </p>
-                    <p class="info-value-apiario"> {{ $endereco->cep ?? 'Não informado' }}</p>
+                    <p class="cep info-value-apiario"> {{ $endereco->cep ?? 'Não informado' }}</p>
                 </div>
             </div>
             

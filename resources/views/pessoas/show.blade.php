@@ -91,7 +91,7 @@
 
           <div class="info-card">
             <h5>CEP</h5>
-            <div class="info-value">{{ $endereco->cep ?? 'Não informado' }}</div>
+            <div class="info-value cep">{{ $endereco->cep ?? 'Não informado' }}</div>
           </div>
 
           <div class="info-card">

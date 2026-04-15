@@ -43,7 +43,7 @@
                             @endif
                             - {{ $apiario->enderecos->bairro ?? '---' }},
                             {{ $apiario->enderecos->cidade ?? '---' }} - {{ $apiario->enderecos->estado ?? '--' }},
-                            CEP: {{ $apiario->enderecos->cep ?? '--' }}
+                            CEP: <span class="cep">{{ $apiario->enderecos->cep ?? '--' }}</span>
                         </td>
                     </tr>
                 @endforeach
