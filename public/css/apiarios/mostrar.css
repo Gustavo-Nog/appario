@@ -2,18 +2,18 @@ main {
     padding: 1em;
 }
 
-.card-apiario, .card-apiario-endereco {
+.card-apiario, .card-apiario-endereco, .card-colmeia{
     border-radius: 2%;
     box-shadow: 0 2px 5px #ffde4e;
 }
 
-.info-apiario {
+.info-apiario, .info-colmeia {
     display: inline-block;
     font-weight: 400; 
     color: #777777;
 }
 
-.info-value-apiario {
+.info-value-apiario, .info-value-colmeia {
     display: inline-block;
     font-weight: 700; 
 }
@@ -75,5 +75,9 @@ main {
     }
     .container-botoes .btn-voltar {
         align-self: flex-start;
+    }
+    
+    .titulo-card-colmeia {
+        font-size: 20px;
     }
 }
