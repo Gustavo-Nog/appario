@@ -34,6 +34,7 @@ Route::group([], function () {
 Route::middleware(['auth', 'ensure.pessoa'])->group(function () {
     Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
 
+    Route::get('pessoas/listar', [PessoaController::class, 'index'])->name('pessoas.listar');
     Route::resource('pessoas', PessoaController::class);
     Route::get('/pessoas/delete', [PessoaController::class, 'delete'])->name('pessoas.delete');
 
