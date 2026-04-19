@@ -3,6 +3,10 @@
 @section('title', 'Dashboard - Appário')
 
 @section('content')
+  @php
+      $pessoa = request()->attributes->get('pessoa');
+      $route = $pessoa->tipo_pessoa === 'RESPONSAVEL' ? 'pessoas.listar' : 'apicultor.construcao';
+  @endphp
   @push('styles')
     <link href="{{ asset('css/pages/dashboard.css') }}" rel="stylesheet">
   @endpush
@@ -20,7 +24,7 @@
       <h2>INSPEÇÕES</h2>
       <img src="{{ asset('img/favosPng.png') }}" alt="Inspeções" />
     </a>
-    <a href="{{ route('apicultor.construcao') }}" class="dashboard-card">
+    <a href="{{ route($route) }}" class="dashboard-card">
       <h2>APICULTOR</h2>
       <img src="{{ asset('img/apicultor.png') }}" alt="Apicultor" />
     </a>
