@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Pessoa extends Model
 {
@@ -38,6 +39,14 @@ class Pessoa extends Model
     public function enderecos()
     {
         return $this->hasMany(EnderecoPessoa::class, 'pessoa_id', 'id_pessoa');
+    }
+
+    public function colmeias(): hasOneThrough
+    {
+        return $this->hasOneThrough(
+            Colmeia::class, Apiario::class,
+            'pessoa_id', 'apiario_id', 'id_pessoa', 'id_apiario'
+        );
     }
     
     public function getEnderecoPrincipal()
