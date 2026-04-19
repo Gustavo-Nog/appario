@@ -12,7 +12,7 @@
       <form action="{{ route('pessoas.update', $pessoa->id_pessoa) }}" method="POST" novalidate class="pessoa-form">
         @csrf
         @method('PUT')
-        @php 
+        @php
           $cpf = $pessoa->cpf ?? '';
           $cep = $endereco->cep ?? '';
           $cpfFormatado = preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', '$1.$2.$3-$4', $cpf);

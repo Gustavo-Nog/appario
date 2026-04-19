@@ -68,7 +68,7 @@
 
           <div class="info-card">
             <h5>Apiários</h5>
-            <div class="info-value">{{ $pessoa->apiarios_count ?? ($pessoa->apiarios ? $pessoa->apiarios->count() : 'Nenhum apiário') }}</div>
+            <div class="info-value">{{ $pessoa->apiarios->count() ?: 'Nenhum apiário' }}</div>
           </div>
 
           <div class="info-card">
