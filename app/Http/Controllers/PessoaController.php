@@ -20,38 +20,38 @@ class PessoaController extends Controller
 
     public function index(Request $request)
     {
-        $is_admin = true;
+        $pessoa = $request->attributes->get('pessoa');
+        $tipo_pessoa = $this->pessoaRepository->getPessoaResponsavel($pessoa->id_pessoa);
+        $is_admin = $tipo_pessoa === 'RESPONSAVEL' ? true : false;
+
          if ($is_admin) {
             try {
-            $pessoas = $this->pessoaRepository->getAllPessoas();
+                $pessoas = $this->pessoaRepository->getAllPessoasTotalColmeias();
+                if ($request->wantsJson()) {
+                    return response()->json([
+                        'status' => 'success',
+                        'pessoas'   => $pessoas,
+                    ], 200);
+                }
 
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'status' => 'success',
-                    'data'   => $pessoas
-                ], 200);
-            }
-            
-            return view('pessoas.listar', compact('pessoas'));
-        } catch (\Throwable $th) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'status'  => 'failed',
-                    'message' => $th->getMessage()
-                ], 500);
-            }
+                return view('pessoas.listar', compact('pessoas'));
+            } catch (\Throwable $th) {
+                if ($request->wantsJson()) {
+                    return response()->json([
+                        'status'  => 'failed',
+                        'message' => $th->getMessage()
+                    ], 500);
+                }
 
-            return redirect()->back()
-                ->withInput()
-                ->withErrors([
-                    'error' => 'Erro a listar as pessoas' . $th->getMessage()
-                ]);
-        }
+                return redirect()->back()
+                    ->withInput()
+                    ->withErrors([
+                        'error' => 'Erro a listar as pessoas' . $th->getMessage()
+                    ]);
+            }
          } else {
-            return redirect()->back()->view('usuario.login');
+            return redirect()->route('login.form');
          }
-         
-        
     }
 
     public function show(Request $request) 
@@ -61,9 +61,9 @@ class PessoaController extends Controller
 
         try {
             $apiarios = $this->apiarioRepository->getApiarioByPessoa($id_pessoa);
+            $totalColmeias = $this->apiarioRepository->getTotalColmeias($id_pessoa);
             $endereco = $pessoa->getEnderecoPrincipal();
-            $totalColmeias = $apiarios->sum('colmeias_count');
-            
+
             if ($request->wantsJson()) {
                 return response()->json([
                     'status' => 'success',
@@ -148,7 +148,7 @@ class PessoaController extends Controller
             }
 
             session()->forget('usuario_id');
-            return redirect()->route('home')->with('success', 'Cadastro concluído com sucesso!');
+            return redirect()->route('login.form')->with('success', 'Cadastro concluído com sucesso!');
         } catch (\Throwable $th) {
             if ($request->wantsJson()) {
                 return response()->json([
