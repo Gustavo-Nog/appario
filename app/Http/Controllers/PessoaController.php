@@ -54,7 +54,7 @@ class PessoaController extends Controller
          }
     }
 
-    public function show(Request $request) 
+    public function show(Request $request)
     {
         $pessoa = $request->attributes->get('pessoa');
         $id_pessoa = $pessoa->id_pessoa;
@@ -84,35 +84,32 @@ class PessoaController extends Controller
                     'message'  => $th->getMessage()
                 ], 404);
             }
+
+            return redirect()->back()->withErrors([
+                'error' => 'Nao foi possivel carregar o perfil.'
+            ]);
         }
+    }
+
+    public function perfil(int $id_pessoa, Request $request)
+    {
+        $pessoa = $this->pessoaRepository->getPessoaById($id_pessoa);
+        $apiarios = $this->apiarioRepository->getApiarioByPessoa($id_pessoa);
+        $totalColmeias = $this->apiarioRepository->getTotalColmeias($id_pessoa);
+        $endereco = $pessoa->getEnderecoPrincipal();
+        return view('pessoas.show', compact('pessoa', 'apiarios', 'totalColmeias', 'endereco'));
     }
 
     public function create(Request $request)
     {
         try {
-            $usuario_id = session('usuario_id');
-
-            if (!$usuario_id) {
-                if ($request->wantsJson()) {
-                    return response()->json([
-                        'status' => 'failed',
-                        'message' => 'É necessário cadastrar um usuário primeiro.'
-                    ], 400);
-                }
-
-                return redirect()->route('usuarios.create')->with(
-                    'error', 'É necessário cadastrar um usuário primeiro.'
-                );
-            }
-
             if ($request->wantsJson()) {
                 return response()->json([
-                    'status' => 'success',
-                    'data' => ['usuario_id' => $usuario_id]
+                    'status' => 'success'
                 ], 200);
             }
 
-            return view('pessoas.inserir', compact('usuario_id'));
+            return view('pessoas.create', compact());
         } catch (\Throwable $th) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -131,9 +128,6 @@ class PessoaController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $request->merge([
-            'usuario_id' => session('usuario_id')
-        ]);
 
         $data = $request->validated();
 
@@ -147,7 +141,6 @@ class PessoaController extends Controller
                 ], 201);
             }
 
-            session()->forget('usuario_id');
             return redirect()->route('login.form')->with('success', 'Cadastro concluído com sucesso!');
         } catch (\Throwable $th) {
             if ($request->wantsJson()) {
@@ -165,10 +158,9 @@ class PessoaController extends Controller
         }
     }
 
-
     public function edit(int $id_pessoa, UpdateRequest $request)
     {
-        $pessoa = request()->attributes->get('pessoa');
+        $pessoa = $this->pessoaRepository->getPessoaById($id_pessoa);
         $endereco = $pessoa->getEnderecoPrincipal();
         $ufs = $request->ufs();
         return view('pessoas.edit', compact('pessoa', 'endereco', 'ufs'));
@@ -177,9 +169,9 @@ class PessoaController extends Controller
     public function update(UpdateRequest $request, int $id_pessoa)
     { 
         $data = $request->validated();
+        $pessoaLogada = $request->attributes->get('pessoa');
         try {
             $pessoa = $this->pessoaRepository->updatePessoa($id_pessoa, $data);
-            $id_pessoa = $pessoa->id_pessoa;
 
             if ($request->wantsJson()) {
                 return response()->json([
@@ -187,9 +179,13 @@ class PessoaController extends Controller
                     'data'   => $pessoa
                 ], 200);
             }
-            
-            return redirect()->route('pessoas.show', $id_pessoa)
-            ->with('success', 'Pessoa atualizada com sucesso!');
+
+            if ($pessoaLogada->tipo_pessoa === 'RESPONSAVEL' && ((int) $pessoaLogada->id_pessoa !== (int) $id_pessoa)) {
+                return redirect()->route('pessoas.listar')->with('success', 'Pessoa atualizada com sucesso!');
+            }
+
+            return redirect()->route('pessoas.show', $id_pessoa)->with('success', 'Pessoa atualizada com sucesso!');
+
         } catch (\Throwable $th) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -225,7 +221,11 @@ class PessoaController extends Controller
                 ], 200);
             }
 
-            return redirect()->route('usuarios.create')->with('success', 'Pessoa e usuário excluídos com sucesso!');
+            if ($pessoa->tipo_pessoa === 'RESPONSAVEL') {
+                return redirect()->route('pessoas.listar')->with('success', 'Pessoa e usuário excluídos com sucesso!');
+            } else {
+                return redirect()->route('usuarios.create')->with('success', 'Pessoa e usuário excluídos com sucesso!');
+            }
         } catch (\Throwable $th) {
             if ($request->wantsJson()) {
                 return response()->json([
