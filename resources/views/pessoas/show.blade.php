@@ -7,28 +7,43 @@
 <link href="{{ asset('css/pessoas/show.css') }}" rel="stylesheet" />
 @endpush
 @vite('resources/js/app.js')
+@php
+  $pessoaLogada = request()->attributes->get('pessoa');
+  $isProfile = $pessoaLogada && $pessoaLogada->id_pessoa === $pessoa->id_pessoa;
+  $isResponsavel = $pessoaLogada && $pessoaLogada->tipo_pessoa === 'RESPONSAVEL';
+  $id_pessoa = $isProfile ? $pessoaLogada->id_pessoa : $pessoa->id_pessoa;
+@endphp
 
 @section('content')
   <div class="container-fluid titulo mb-3">
     <div class="row align-items-center">
       <div class="col-6 col-md-6 mt-3 mt-md-0">
-        <h1 class="mb-0">SEU PERFIL</h1> 
+        @if($isProfile)
+          <h1 class="mb-0">SEU PERFIL</h1>
+        @else
+          <h1 class="mb-0 text-uppercase ">PERFIL DE {{ $pessoa->nome }}</h1>
+        @endif
       </div>
-      <div class="col-6 col-md-6 text-md-end mt-3 mt-md-0 botoes-perfil">
-        <a href="{{ route('pessoas.edit', $pessoa->id_pessoa) }}" class="btn btn-primary me-2">
-          <i class="bi bi-pencil"></i>
-          <span class="d-none d-md-inline"> Editar perfil</span>
-        </a>
 
-        <form action="{{ route('pessoas.destroy', $pessoa->id_pessoa) }}" method="POST" class="d-inline">
-          @csrf
-          @method('DELETE')
-          <button type="submit" class="btn btn-danger" onclick="return confirm('Confirma exclusão desta pessoa?')">
-            <i class="bi bi-trash"></i>
-            <span class="d-none d-md-inline"> Excluir perfil</span>
-          </button>
-        </form>
-      </div>
+      @if($isProfile || $isResponsavel)
+        <div class="col-6 col-md-6 text-md-end mt-3 mt-md-0 botoes-perfil">
+          <a href="{{ route('pessoas.edit', $id_pessoa) }}" class="btn btn-primary me-2">
+            <i class="bi bi-pencil"></i>
+            <span class="d-none d-md-inline"> Editar perfil</span>
+          </a>
+
+          <form action="{{ route('pessoas.destroy', $id_pessoa) }}" method="POST" class="d-inline">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Confirma exclusão desta pessoa?')">
+              <i class="bi bi-trash"></i>
+              <span class="d-none d-md-inline"> Excluir perfil</span>
+            </button>
+          </form>
+        </div>
+      @else
+
+      @endif
     </div>
   </div>
 
@@ -68,7 +83,7 @@
 
           <div class="info-card">
             <h5>Apiários</h5>
-            <div class="info-value">{{ $pessoa->apiarios_count ?? ($pessoa->apiarios ? $pessoa->apiarios->count() : 'Nenhum apiário') }}</div>
+            <div class="info-value">{{ $pessoa->apiarios->count() ?: 'Nenhum apiário' }}</div>
           </div>
 
           <div class="info-card">
@@ -91,7 +106,7 @@
 
           <div class="info-card">
             <h5>CEP</h5>
-            <div class="info-value">{{ $endereco->cep ?? 'Não informado' }}</div>
+            <div class="info-value cep">{{ $endereco->cep ?? 'Não informado' }}</div>
           </div>
 
           <div class="info-card">

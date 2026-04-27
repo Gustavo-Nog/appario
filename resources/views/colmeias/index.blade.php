@@ -12,7 +12,9 @@
 
   @if($colmeias->count() > 0)
     @foreach($colmeias as $colmeia)
-      <div class="colmeia-card">
+      <div class="colmeia-card"
+        onclick="window.location='{{ route('apiarios.colmeias.show', [$colmeia->apiario_id, $colmeia->id_colmeia]) }}'"
+      >
         <div class="colmeia-info">
             <div class="colmeia-especie">{{ $colmeia->especie }}</div>
             <div class="colmeia-detalhes">

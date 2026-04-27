@@ -42,7 +42,7 @@
                             @endif
                             - {{ $colmeia->apiario->enderecos->bairro ?? '---' }},
                             {{ $colmeia->apiario->enderecos->cidade ?? '---' }} - {{ $colmeia->apiario->enderecos->estado ?? '--' }},
-                            CEP: {{ $colmeia->apiario->enderecos->cep ?? '--' }}
+                            CEP: <span class="cep">{{ $colmeia->apiario->enderecos->cep ?? '--' }}</span>
                         </td>
                     </tr>
                 @endforeach

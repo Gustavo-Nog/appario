@@ -12,9 +12,11 @@
       <form action="{{ route('pessoas.update', $pessoa->id_pessoa) }}" method="POST" novalidate class="pessoa-form">
         @csrf
         @method('PUT')
-        @php 
+        @php
           $cpf = $pessoa->cpf ?? '';
+          $cep = $endereco->cep ?? '';
           $cpfFormatado = preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', '$1.$2.$3-$4', $cpf);
+          $cepFormatado = preg_replace('/(\d{5})(\d{3})/', '$1-$2', $cep);
         @endphp
 
         <div class="row">
@@ -102,7 +104,7 @@
 
             <div class="mb-3">
               <label for="cep" class="form-label">CEP</label>
-              <input type="text" class="form-control @error('cep') is-invalid @enderror" id="cep" name="cep" value="{{ old('cep', $endereco->cep ?? '') }}" />
+              <input type="text" class="cep form-control @error('cep') is-invalid @enderror" id="cep" name="cep" value="{{ old('cep', $cepFormatado ?? '') }}" maxlength="9" minlength="9" placeholder="00000-000"/>
               @error('cep')
                 <div class="invalid-feedback">{{ $message }}</div>
               @enderror

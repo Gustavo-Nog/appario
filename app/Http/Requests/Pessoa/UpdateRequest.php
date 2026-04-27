@@ -12,16 +12,21 @@ class UpdateRequest extends FormRequest
         return true;
     }
 
-    public function prepareForValidation()
+    public function prepareForValidation(): void
     {
         if ($this->has('cpf')) {
             $this->merge([
                 'cpf' => preg_replace('/\D/', '', $this->cpf),
             ]);
         }
+        if ($this->has('cpf')) {
+            $this->merge([
+                'cpf' => (($cpf = preg_replace('/\D/', '', $this->cpf)) === '') ? null : $cpf,
+            ]);
+        }
     }
 
-        public function ufs(): array 
+    public function ufs(): array 
     {
         return [
             'AC' => 'Acre',
@@ -65,7 +70,7 @@ class UpdateRequest extends FormRequest
                 'sometimes',
                 'string',
                 'size:11',
-                Rule::unique('pessoas', 'cpf')->ignore($this->route('pessoa'), 'id_pessoa')
+                Rule::unique('pessoas', 'cpf')->ignore((int) $this->route('id_pessoa'), 'id_pessoa')
             ],
             'tipo_pessoa' => ['sometimes', Rule::in(['APICULTOR', 'RESPONSAVEL'])],
             //'usuario_id' => 'sometimes|exists:usuarios,id_usuarios',
@@ -74,7 +79,7 @@ class UpdateRequest extends FormRequest
             'numero'      => 'sometimes|nullable|string|max:10',
             'complemento' => 'nullable|string|max:75',
             'bairro'      => 'sometimes|nullable|string|max:50',
-            'cep'         => 'sometimes|nullable|string|size:10',
+            'cep'         => 'sometimes|nullable|string|size:8',
             'cidade'      => 'sometimes|nullable|string|max:50',
             'estado'      => ['sometimes', 'nullable', 'string', 'size:2', Rule::in($ufs)],
         ];

@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Colmeia\StoreRequest;
 use App\Http\Requests\Colmeia\UpdateRequest;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ColmeiaController extends Controller
 {
@@ -23,7 +26,7 @@ class ColmeiaController extends Controller
         $this->apiarioRepository = $apiarioRepository;
     }
     
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse|View|RedirectResponse
     {
         try {
             $pessoa = $request->attributes->get('pessoa');
@@ -55,7 +58,7 @@ class ColmeiaController extends Controller
         }
     }
 
-    public function show(int $id_apiario, int $id_colmeia, Request $request)
+    public function show(int $id_apiario, int $id_colmeia, Request $request): JsonResponse|View
     {
         $pessoa = $request->attributes->get('pessoa');
         $id_pessoa = $pessoa->id_pessoa;
@@ -80,7 +83,7 @@ class ColmeiaController extends Controller
         }
     }
 
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         $pessoa = $request->attributes->get('pessoa');
         $id_pessoa = $pessoa->id_pessoa;
@@ -89,7 +92,7 @@ class ColmeiaController extends Controller
         return view('colmeias.create', compact('apiarios'));
     }
 
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request): JsonResponse|RedirectResponse
     {
         $pessoa = $request->attributes->get('pessoa');
         $pessoa_id = $pessoa->id_pessoa;
@@ -126,7 +129,7 @@ class ColmeiaController extends Controller
         }
     }
 
-    public function edit(int $id_apiario, int $id_colmeia, Request $request)
+    public function edit(int $id_apiario, int $id_colmeia, Request $request): View
     {
         $pessoa = $request->attributes->get('pessoa');
         $id_pessoa = $pessoa->id_pessoa;
@@ -138,7 +141,7 @@ class ColmeiaController extends Controller
         return view('colmeias.editar', compact('colmeia', 'apiarios'));
     }
 
-    public function update(int $id_apiario, int $id_colmeia, UpdateRequest $request)
+    public function update(int $id_apiario, int $id_colmeia, UpdateRequest $request): JsonResponse|RedirectResponse
     {
         $pessoa = $request->attributes->get('pessoa');
         $id_pessoa = $pessoa->id_pessoa;
@@ -177,7 +180,7 @@ class ColmeiaController extends Controller
         }
     }
 
-    public function destroy(int $id_apiario, int $id_colmeia, Request $request)
+    public function destroy(int $id_apiario, int $id_colmeia, Request $request): JsonResponse|RedirectResponse
     {
         $pessoa = $request->attributes->get('pessoa');
         $id_pessoa = $pessoa->id_pessoa;

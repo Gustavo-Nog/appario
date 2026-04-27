@@ -12,9 +12,15 @@ class StoreRequest extends FormRequest
         return auth()->check();
     }
 
-    /**
-    * Lista associativa de sigla => nome completo dos estados.
-    */
+    public function prepareForValidation()
+    {
+        if ($this->has('cep')) {
+            $this->merge([
+                'cep' => preg_replace('/\D/', '', $this->cep),
+            ]);
+        }
+    }
+
     public function ufs(): array
     {
         return [
@@ -64,7 +70,7 @@ class StoreRequest extends FormRequest
             'numero' => 'required|string|max:10',
             'complemento' => 'nullable|string|max:75',
             'bairro' => 'required|string|max:50',
-            'cep' => 'required|string|size:9',
+            'cep' => 'required|string|size:8',
             'cidade' => 'required|string|max:50',
             'estado' => ['required', 'string', 'size:2', Rule::in($ufs)],
         ];
@@ -82,7 +88,7 @@ class StoreRequest extends FormRequest
             'logradouro.required' => 'O campo Logradouro é obrigatório.',
             'numero.required' => 'O campo Número é obrigatório.',
             'cep.required' => 'O campo CEP é obrigatório.',
-            'cep.size' => 'O campo CEP deve ter exatamente 9 caracteres.',
+            'cep.size' => 'O campo CEP deve ter exatamente 8 caracteres.',
             'estado.required' => 'O campo Estado é obrigatório.',
             'estado.in' => 'Selecione um estado válido.',
         ];

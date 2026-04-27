@@ -16,7 +16,13 @@ class StoreRequest extends FormRequest
     {
         if ($this->has('cpf')) {
             $this->merge([
-                'cpf' => preg_replace('/\D/', '', $this->cpf),
+                'cpf' => (($cpf = preg_replace('/\D/', '', $this->cpf)) === '') ? null : $cpf,
+            ]);
+        }
+
+        if ($this->has('cep')) {
+            $this->merge([
+                'cep' => preg_replace('/\D/', '', $this->cep),
             ]);
         }
     }
@@ -72,7 +78,7 @@ class StoreRequest extends FormRequest
             'numero'      => 'sometimes|nullable|string|max:10',
             'complemento' => 'nullable|string|max:75',
             'bairro'      => 'sometimes|nullable|string|max:50',
-            'cep'         => 'sometimes|nullable|string|size:10',
+            'cep'         => 'sometimes|nullable|string|size:8',
             'cidade'      => 'sometimes|nullable|string|max:50',
             'estado'      => ['sometimes', 'nullable', 'string', 'size:2', Rule::in($ufs)],
         ];
