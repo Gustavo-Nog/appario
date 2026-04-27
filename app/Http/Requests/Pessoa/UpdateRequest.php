@@ -19,9 +19,9 @@ class UpdateRequest extends FormRequest
                 'cpf' => preg_replace('/\D/', '', $this->cpf),
             ]);
         }
-        if ($this->has('cep')) {
+        if ($this->has('cpf')) {
             $this->merge([
-                'cep' => preg_replace('/\D/', '', $this->cep),
+                'cpf' => (($cpf = preg_replace('/\D/', '', $this->cpf)) === '') ? null : $cpf,
             ]);
         }
     }
@@ -70,7 +70,7 @@ class UpdateRequest extends FormRequest
                 'sometimes',
                 'string',
                 'size:11',
-                Rule::unique('pessoas', 'cpf')->ignore($this->route('pessoa'), 'id_pessoa')
+                Rule::unique('pessoas', 'cpf')->ignore((int) $this->route('id_pessoa'), 'id_pessoa')
             ],
             'tipo_pessoa' => ['sometimes', Rule::in(['APICULTOR', 'RESPONSAVEL'])],
             //'usuario_id' => 'sometimes|exists:usuarios,id_usuarios',

@@ -16,7 +16,7 @@ class StoreRequest extends FormRequest
     {
         if ($this->has('cpf')) {
             $this->merge([
-                'cpf' => preg_replace('/\D/', '', $this->cpf),
+                'cpf' => (($cpf = preg_replace('/\D/', '', $this->cpf)) === '') ? null : $cpf,
             ]);
         }
 
