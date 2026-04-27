@@ -42,6 +42,7 @@ class UsuarioController extends Controller
     public function create(Request $request)
     {
         try {
+            $origem = $request->query('origem');
             if ($request->wantsJson()) {
                 return response()->json([
                     'status' => 'success',
@@ -49,7 +50,7 @@ class UsuarioController extends Controller
                 ], 200);
             }
 
-            return view('usuarios.create');
+            return view('usuarios.create', compact('origem'));
         } catch (\Throwable $th) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -78,6 +79,10 @@ class UsuarioController extends Controller
                     'status' => 'success',
                     'data'   => $usuario
                 ], 201);
+            }
+
+            if ($request->input('origem') === 'listar') {
+                return redirect()->route('pessoas.listar')->with('success', 'Usuário e pessoa cadastrados com sucesso!');
             }
 
             return redirect()->route('dashboard')->with('success', 'Usuário e pessoa cadastrados com sucesso!');
