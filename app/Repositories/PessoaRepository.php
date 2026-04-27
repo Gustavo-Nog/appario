@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Pessoa;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 
@@ -27,13 +27,14 @@ class PessoaRepository
         return $pessoa->tipo_pessoa;
     }
 
-    public function getAllPessoasTotalColmeias(): Collection
+    public function getAllPessoasTotalColmeias(): LengthAwarePaginator
     {
         return $this->pessoaModel
-            ->select('id_pessoa', 'nome', 'sobrenome', 'cpf', 'tipo_pessoa')
+            ->select('id_pessoa', 'nome', 'sobrenome', 'cpf', 'tipo_pessoa', 'usuario_id')
+            ->with('usuario')
             ->withCount('colmeias')
             ->oldest()
-            ->get();
+            ->paginate(10);
     }
 
     public function getEnderecosByPessoa(int $id_pessoa)
@@ -81,6 +82,6 @@ class PessoaRepository
     public function deletePessoa(int $id_pessoa): bool
     {
         $pessoa = $this->getPessoaById($id_pessoa);
-        return (bool) $pessoa->delete();
+        return (bool) $pessoa->usuario->delete();
     }
 }
