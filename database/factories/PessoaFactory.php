@@ -18,8 +18,8 @@ class PessoaFactory extends Factory
             'sobrenome' => $this->faker->lastName(),
             'endereco' => $this->faker->address(),
             'cpf' => $this->faker->unique()->numerify('###########'),
-            'tipo' => $this->faker->randomElement(['APICULTOR', 'RESPONSAVEL']),
-            'usuario_id' => Usuario::inRandomOrder()->first()->id_usuarios,
+            'tipo_pessoa' => $this->faker->randomElement(['APICULTOR', 'RESPONSAVEL']),
+            'usuario_id' => Usuario::inRandomOrder()->first()->id_usuario,
             'created_at' => now(),
             'updated_at' => now(),
         ];

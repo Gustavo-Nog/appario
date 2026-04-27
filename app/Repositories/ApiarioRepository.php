@@ -43,6 +43,10 @@ class ApiarioRepository
         return $apiario;
     }
 
+    public function getTotalColmeias(int $pessoa_id): int
+    {
+        return $this->getApiarioByPessoa($pessoa_id)->sum('colmeias_count');
+    }
     public function createApiario(array $data): Apiario
     {
         DB::beginTransaction();

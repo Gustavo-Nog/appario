@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'ensure.pessoa' => \App\Http\Middleware\EnsurePessoa::class,
+            'can.manage.pessoa' => \App\Http\Middleware\CanManagePessoa::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
