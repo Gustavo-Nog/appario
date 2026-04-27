@@ -34,9 +34,14 @@ Route::group([], function () {
 Route::middleware(['auth', 'ensure.pessoa'])->group(function () {
     Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
 
+    Route::get('/pessoas/perfil/{id_pessoa}', [PessoaController::class, 'perfil'])->name('pessoas.perfil');
     Route::get('pessoas/listar', [PessoaController::class, 'index'])->name('pessoas.listar');
-    Route::resource('pessoas', PessoaController::class);
-    Route::get('/pessoas/delete', [PessoaController::class, 'delete'])->name('pessoas.delete');
+    Route::resource('pessoas', PessoaController::class) ->except(['edit', 'update', 'destroy']);
+    Route::middleware('can.manage.pessoa')->group(function () {
+        Route::get('/pessoas/{id_pessoa}/edit', [PessoaController::class, 'edit'])->name('pessoas.edit');
+        Route::put('/pessoas/{id_pessoa}', [PessoaController::class, 'update'])->name('pessoas.update');
+        Route::delete('/pessoas/{id_pessoa}', [PessoaController::class, 'destroy'])->name('pessoas.destroy');
+    });
 
     Route::get('/apiarios/adicionar', [ApiarioController::class, 'create'])->name('apiarios.adicionar');
     Route::resource('apiarios', ApiarioController::class);
