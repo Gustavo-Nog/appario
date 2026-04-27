@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Pessoa extends Model
@@ -23,20 +24,17 @@ class Pessoa extends Model
 
     protected $attributes = ['tipo_pessoa' => 'APICULTOR'];
 
-    // Relação com usuário
     public function usuario(): BelongsTo
     {
         return $this->belongsTo(Usuario::class, 'usuario_id', 'id_usuario');
     }
     
-        // Relação com pessoa (1:N)
-    public function apiarios()
+    public function apiarios(): HasMany
     {
-        return $this->hasMany(Apiario::class, 'pessoa_id', 'id_pessoa')->chaperone();
+        return $this->hasMany(Apiario::class, 'pessoa_id', 'id_pessoa');
     }
 
-    // Relação com endereços (1:N)
-    public function enderecos()
+    public function enderecos(): HasMany
     {
         return $this->hasMany(EnderecoPessoa::class, 'pessoa_id', 'id_pessoa');
     }
