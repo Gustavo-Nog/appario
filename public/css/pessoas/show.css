@@ -51,6 +51,13 @@ main {
     gap: 0.5rem;
 }
 
+.botoes-perfil .btn {
+    height: 100%;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+}
+
 .placeholder { color: #6c757d; font-style: italic; }
 
 @media (min-width: 768px) {
