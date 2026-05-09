@@ -5,7 +5,8 @@
 @section('content')
   @php
       $pessoa = request()->attributes->get('pessoa');
-      $route = $pessoa->tipo_pessoa === 'RESPONSAVEL' ? 'pessoas.listar' : 'apicultor.construcao';
+      $isResponsavel = $pessoa->tipo_pessoa === 'RESPONSAVEL';
+      $route = $isResponsavel ? 'pessoas.listar' : 'apicultor.construcao';
   @endphp
   @push('styles')
     <link href="{{ asset('css/pages/dashboard.css') }}" rel="stylesheet">
@@ -24,9 +25,16 @@
       <h2>INSPEÇÕES</h2>
       <img src="{{ asset('img/favosPng.png') }}" alt="Inspeções" />
     </a>
-    <a href="{{ route($route) }}" class="dashboard-card">
-      <h2>APICULTOR</h2>
-      <img src="{{ asset('img/apicultor.png') }}" alt="Apicultor" />
-    </a>
+    @if($isResponsavel)
+      <a href="{{ route($route) }}" class="dashboard-card">
+        <h2>APICULTORES</h2>
+        <img src="{{ asset('img/apicultor.png') }}" alt="Apicultor" />
+      </a>
+    @else
+      <a href="{{ route('pessoas.show', $pessoa->id_pessoa) }}" class="dashboard-card">
+        <h2>PERFIL</h2>
+        <img src="{{ asset('img/apicultor.png') }}" alt="Apicultor" />
+      </a>
+    @endif
   </div>
 @endsection
