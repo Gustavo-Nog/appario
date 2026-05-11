@@ -43,6 +43,15 @@ header {
   flex-grow: 1;
 }
 
+.menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
 .nav-menu a {
   color: white;
   text-decoration: none;
@@ -115,18 +124,58 @@ header {
   header {
     padding: 1rem;
     gap: 0.5rem;
+    display: flex;
+    align-items: center;
   }
-  .logo-container img {
-    height: 30px;
+
+  .menu-toggle {
+    display: block;
+    order: 1;
+    z-index: 11;
   }
+
+  .logo-container {
+    order: 2;
+    margin: 0 auto;
+  }
+
+  .user-menu {
+    order: 3;
+    margin-left: auto;
+    z-index: 11;
+  }
+
   .nav-menu {
-    flex-wrap: wrap;
-    gap: 1rem;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    background-color: white;
+    position: absolute;
+    top: 70px;
+    right: 1rem;
+    left: 1rem;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    z-index: 10;
   }
+
+  .nav-menu.show {
+    display: flex;
+  }
+
   .nav-menu a {
     font-size: 0.9rem;
+    color: #1a1a1a;
   }
+
   .user-menu a {
     font-size: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .logo-container img {
+    height: 40px;
   }
 }
