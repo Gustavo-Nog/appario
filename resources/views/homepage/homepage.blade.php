@@ -14,7 +14,7 @@
         <div class="logo">
             <img src="{{ asset('img/appAriologo.png') }}" alt="logo">
         </div>
-        <div class="menu-toggle" onClick="toggleMenu()">☰</div>
+        <button class="menu-toggle" id="menuToggle" aria-controls="nav-buttons" aria-expanded="false" aria-label="Abrir menu">☰</button>
         <div class="nav-buttons" id="nav-buttons">
             <a href="{{ route('usuarios.create') }}" class="btn-criar">criar conta</a>
             <a href="{{ route('login.form') }}" class="btn-login">login</a>
@@ -33,11 +33,6 @@
 
     @include('footer.footer')
 
-    <script>
-        function toggleMenu() {
-            const navButtons = document.getElementById('nav-buttons');
-            navButtons.classList.toggle('show');
-        }
-    </script>
+    @vite('resources/js/app.js')
 </body>
 </html>
