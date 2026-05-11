@@ -1,6 +1,17 @@
 import './bootstrap';
 
 document.addEventListener('DOMContentLoaded', () => {
+  const menuToggle = document.getElementById('menuToggle');
+  const navButtons = document.getElementById('nav-buttons');
+  if (!menuToggle || !navButtons) return;
+
+  menuToggle.addEventListener('click', () => {
+    const isOpen = navButtons.classList.toggle('show');
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', (e) => {
     const buttonDelete = e.target.closest('.button-delete');
     if (!buttonDelete) return;
@@ -105,3 +116,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
