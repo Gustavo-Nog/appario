@@ -19,7 +19,9 @@
       <img src="{{ asset('img/appAriologo.png') }}" alt="Logo Appário" />
     </div>
 
-    <nav class="nav-menu">
+    <button class="menu-toggle" id="menuToggle" aria-controls="nav-buttons" aria-expanded="false" aria-label="Abrir menu">☰</button>
+
+    <nav class="nav-menu nav-buttons" id="nav-buttons">
       <a href="{{ route('dashboard') }}">INÍCIO</a>
       <a href="{{ route('apiarios.index') }}">APIÁRIO</a>
       <a href="{{ route('colmeias.index') }}">COLMEIA</a>
@@ -81,3 +83,4 @@
   @vite('resources/js/app.js')
 </body>
 </html>
+
